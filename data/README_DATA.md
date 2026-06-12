@@ -1,3 +1,4 @@
-# תיקיית נתונים
+# Data files
 
-`sample_cars.csv` הוא מדגם הדגמה. `market_samples_template.csv` הוא קובץ תבנית להזנת נתוני שוק אמיתיים.
+- `vehicle_reference.csv` — רפרנס לזיהוי הרכב הקיים.
+- `replacement_options.csv` — אפשרויות רכישה לרכב הבא.

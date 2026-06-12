@@ -1,0 +1,16 @@
+﻿manufacturer,model,trim,category,powertrain,msrp_reference,annual_depr_rate,warranty_years,parts_support_years,reliability_risk_factor,notes
+Mitsubishi,Outlander,Premium,קרוסאובר 7 מקומות,Gasoline,170000,0.07,3,7,1.05,רפרנס אאוטלנדר 2016
+Toyota,Corolla,Hybrid,משפחתית קומפקטית,Hybrid,150000,0.08,5,7,0.75,שמירת ערך גבוהה
+Toyota,Yaris Cross,Hybrid,קרוסאובר קטן,Hybrid,155000,0.085,5,7,0.75,שמירת ערך גבוהה
+Hyundai,Kona,Hybrid,קרוסאובר קטן,Hybrid,176600,0.105,5,7,0.9,מחיר מבצע ידוע
+Hyundai,Ioniq,Hybrid,משפחתית קומפקטית,Hybrid,145000,0.085,5,7,0.9,היברידי נפוץ
+Kia,Niro,HEV,קרוסאובר קטן,Hybrid,160000,0.09,5,7,0.9,היברידי נפוץ
+Kia,Stonic,Urban,קרוסאובר קטן,Gasoline,120000,0.105,3,7,0.95,סופר מיני קרוסאובר
+Skoda,Kamiq,Ambition,קרוסאובר קטן,Gasoline,135000,0.105,3,7,1.0,אירופי קטן
+Skoda,Scala,Ambition,משפחתית קומפקטית,Gasoline,125000,0.105,3,7,1.0,משפחתית קומפקטית
+MG,MG3+,Luxury,סופר מיני,Hybrid,136000,0.115,7,7,1.05,אחריות ארוכה
+Chery,Tiggo 4,Hybrid,קרוסאובר קטן,Hybrid,136000,0.135,5,7,1.15,מותג סיני
+Jaecoo,7,PHEV,קרוסאובר בינוני,PHEV,190000,0.145,5,7,1.2,PHEV חדש בשוק
+BYD,Atto 3,Design,קרוסאובר קטן,EV,165000,0.15,6,7,1.1,חשמלי סיני נפוץ
+Tesla,Model 3,Standard,משפחתית חשמלית,EV,230000,0.155,4,7,1.05,חשמלי עם תנודתיות מחיר
+Mazda,CX-5,Executive,קרוסאובר בינוני,Gasoline,180000,0.095,3,7,0.9,סחירות טובה

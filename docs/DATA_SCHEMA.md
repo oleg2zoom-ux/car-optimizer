@@ -1,9 +1,37 @@
-# סכמה למסד נתוני רכבים
+# Data schema
 
-הקובץ יכול להיות CSV או Excel. כל שורה היא אפשרות רכישה או תצפית שוק.
+## vehicle_reference.csv
 
-עמודות חובה: record_id, manufacturer, model, trim, model_year, vehicle_age_years, category, powertrain, ownership_type, km, hand, purchase_price, annual_depr_rate, risk_sigma, source_type, source_confidence.
+Reference table for identifying the current vehicle.
 
-annual_depr_rate הוא שיעור שחיקה שנתי בין 0 ל-1. risk_sigma הוא טווח סיכון סביב התחזית בין 0 ל-1.
+Important columns:
+- manufacturer
+- model
+- trim
+- category
+- powertrain
+- msrp_reference
+- annual_depr_rate
+- warranty_years
+- parts_support_years
+- reliability_risk_factor
 
-אין לערבב מחיר מבוקש, מחיר טרייד-אין, מחיר מחירון ומחיר עסקה בלי לציין מקור.
+## replacement_options.csv
+
+Purchase options for the next car.
+
+Important columns:
+- manufacturer
+- model
+- trim
+- model_year
+- vehicle_age_years
+- category
+- powertrain
+- ownership_type
+- purchase_price
+- annual_depr_rate
+- risk_sigma
+- warranty_years
+- parts_support_years
+- reliability_risk_factor

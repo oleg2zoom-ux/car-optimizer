@@ -1,10 +1,11 @@
 # Changelog
 
-## v0.3.0
+## v0.4.0
 
-- Rebuilt around current car and replacement timing.
-- Added existing loan inputs.
-- Added sell-now vs sell-later optimization.
-- Added used car age categories: 3, 5, 7, 10, 15.
-- Removed running costs from core score.
-- Replaced sliders with visible numeric inputs/select boxes.
+- Owner-first flow.
+- Current vehicle reference database.
+- Automatic current value estimate.
+- Date-aware vehicle age calculation.
+- Current loan payoff and post-loan saving logic.
+- Age/warranty/parts-support risk penalty.
+- Recommendation wording added.

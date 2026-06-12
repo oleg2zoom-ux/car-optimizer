@@ -1,0 +1,19 @@
+﻿record_id,source_type,source_name,observation_date,manufacturer,model,trim,model_year,vehicle_age_years,category,powertrain,ownership_type,km,hand,msrp_new,asking_price,deal_price_est,trade_in_price_est,purchase_price,annual_depr_rate,risk_sigma,warranty_years,parts_support_years,reliability_risk_factor,source_confidence,notes
+R0001,Demo,MVP,2026-06-12,MG,MG3+,Luxury,2026,0,סופר מיני,Hybrid,New,0,0,136000,136000,136000,0,136000,0.115,0.12,7,7,1.05,0.4,חדש
+R0002,Demo,MVP,2026-06-12,Hyundai,Kona,Prestige,2025,0,קרוסאובר קטן,Hybrid,New,0,0,176600,176600,176600,0,176600,0.105,0.1,5,7,0.9,0.45,חדש
+R0003,Demo,MVP,2026-06-12,Chery,Tiggo 4,Hybrid,2025,0,קרוסאובר קטן,Hybrid,New,0,0,136000,136000,136000,0,136000,0.135,0.16,5,7,1.15,0.35,חדש
+R0004,Demo,MVP,2026-06-12,Jaecoo,7,PHEV,2025,0,קרוסאובר בינוני,PHEV,New,0,0,190000,190000,190000,0,190000,0.145,0.19,5,7,1.2,0.35,חדש
+R0005,Demo,MVP,2026-06-12,Toyota,Yaris Cross,Hybrid,2025,0,קרוסאובר קטן,Hybrid,New,0,0,155000,155000,155000,0,155000,0.085,0.08,5,7,0.75,0.45,חדש
+R0006,Demo,MVP,2026-06-12,Toyota,Corolla,Hybrid,2023,3,משפחתית קומפקטית,Hybrid,Private Used,45000,1,150000,125000,121000,112000,121000,0.08,0.08,5,7,0.75,0.45,משומש 3 שנים
+R0007,Demo,MVP,2026-06-12,Hyundai,Kona,Hybrid,2023,3,קרוסאובר קטן,Hybrid,Private Used,50000,1,165000,132000,128000,118000,128000,0.095,0.1,5,7,0.9,0.42,משומש 3 שנים
+R0008,Demo,MVP,2026-06-12,Kia,Niro,HEV,2023,3,קרוסאובר קטן,Hybrid,Private Used,52000,1,160000,126000,122000,112000,122000,0.09,0.09,5,7,0.9,0.42,משומש 3 שנים
+R0009,Demo,MVP,2026-06-12,BYD,Atto 3,Design,2023,3,קרוסאובר קטן,EV,Private Used,50000,1,165000,138000,135000,124000,135000,0.15,0.18,6,7,1.1,0.35,משומש 3 שנים
+R0010,Demo,MVP,2026-06-12,Toyota,Corolla,Hybrid,2021,5,משפחתית קומפקטית,Hybrid,Private Used,80000,2,145000,103000,99000,91000,99000,0.08,0.08,5,7,0.75,0.45,משומש 5 שנים
+R0011,Demo,MVP,2026-06-12,Hyundai,Ioniq,Hybrid,2021,5,משפחתית קומפקטית,Hybrid,Private Used,85000,2,145000,97000,93000,85000,93000,0.085,0.09,5,7,0.9,0.42,משומש 5 שנים
+R0012,Demo,MVP,2026-06-12,Mazda,CX-5,Executive,2021,5,קרוסאובר בינוני,Gasoline,Private Used,80000,1,180000,130000,125000,115000,125000,0.095,0.1,3,7,0.9,0.4,משומש 5 שנים
+R0013,Demo,MVP,2026-06-12,Toyota,Yaris,Hybrid,2019,7,סופר מיני,Hybrid,Private Used,105000,2,115000,73000,70000,64000,70000,0.075,0.08,5,7,0.75,0.42,משומש 7 שנים
+R0014,Demo,MVP,2026-06-12,Toyota,Corolla,Hybrid,2019,7,משפחתית קומפקטית,Hybrid,Private Used,110000,2,140000,79000,76000,70000,76000,0.08,0.09,5,7,0.75,0.42,משומש 7 שנים
+R0015,Demo,MVP,2026-06-12,Nissan,Qashqai,Acenta,2019,7,קרוסאובר קטן,Gasoline,Private Used,110000,2,150000,74000,71000,65000,71000,0.105,0.12,3,7,1.0,0.35,משומש 7 שנים
+R0016,Demo,MVP,2026-06-12,Mitsubishi,Outlander,Premium,2016,10,קרוסאובר 7 מקומות,Gasoline,Private Used,115000,1,170000,78000,76700,71000,76700,0.07,0.12,3,7,1.05,0.55,משומש 10 שנים
+R0017,Demo,MVP,2026-06-12,Toyota,Auris,Hybrid,2016,10,משפחתית קומפקטית,Hybrid,Private Used,135000,2,135000,54000,51000,47000,51000,0.08,0.1,5,7,0.8,0.38,משומש 10 שנים
+R0018,Demo,MVP,2026-06-12,Toyota,Corolla,GLI,2011,15,משפחתית קומפקטית,Gasoline,Private Used,180000,3,120000,30000,28000,24000,28000,0.055,0.18,3,7,0.85,0.32,משומש 15 שנים
