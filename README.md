@@ -1,35 +1,69 @@
-# car-optimizer
-This is car buying optimizer program for  Israely resident. This is Exclusive approach for live question - should one change his car and how he should do it economic way
-# Car Purchase Optimization Calculator
+# מחשבון אופטימיזציית רכישת רכב
 
-A Hebrew Streamlit app for comparing car purchase options using total cost of ownership: purchase price, depreciation, expected resale value, financing, monthly payment limits, cash contribution and running costs.
+אפליקציית Streamlit בעברית לבחירת רכב לפי עלות-תועלת: מחיר רכישה, ירידת ערך, שווי מכירה עתידי, מימון, הון עצמי, החזר חודשי ועלויות שימוש.
 
-## Project structure
+המטרה היא לבנות כלי החלטה מעשי: האם כדאי לקנות רכב חדש, רכב בן שנה-שלוש, רכב היברידי, חשמלי, פלאג-אין או בנזין — לפי מגבלות כספיות אמיתיות.
 
-- `app.py` — Streamlit user interface.
-- `car_optimizer/` — finance, valuation, data loading and optimization logic.
-- `data/sample_cars.csv` — demo dataset.
-- `data/market_samples_template.csv` — template for real market observations.
-- `docs/DATA_SCHEMA.md` — data schema documentation.
-- `docs/STREAMLIT_DEPLOY.md` — deployment guide.
-- `scripts/validate_data.py` — validates CSV/Excel data files.
-- `requirements.txt` — Python dependencies.
+## מה יש בפרויקט
 
-## Local run
+- `app.py` — ממשק המשתמש הראשי ב-Streamlit.
+- `car_optimizer/` — קוד החישובים: מימון, ירידת ערך, אופטימיזציה וטעינת נתונים.
+- `data/sample_cars.csv` — מדגם הדגמה ראשוני.
+- `data/market_samples_template.csv` — תבנית להזנת תצפיות שוק אמיתיות.
+- `docs/DATA_SCHEMA.md` — הסבר מלא על מבנה הנתונים.
+- `docs/STREAMLIT_DEPLOY.md` — הוראות העלאה ל-Streamlit Community Cloud.
+- `scripts/validate_data.py` — בדיקת תקינות לקובץ נתונים.
+- `requirements.txt` — ספריות Python הדרושות להרצה.
+
+## הרצה מקומית
+
+דרישות:
+- Python 3.10 ומעלה
+- pip
+
+פקודות:
 
 ```bash
 pip install -r requirements.txt
 streamlit run app.py
 ```
 
-## Deploy to Streamlit Community Cloud
+## העלאה ל-GitHub
 
-Create a GitHub repository, upload the project files, then create a new Streamlit app with:
+1. יוצרים repository חדש ב-GitHub, למשל `car-optimizer`.
+2. מעלים את כל הקבצים והתיקיות מתוך הפרויקט.
+3. לא מעלים את קובץ ה-ZIP עצמו, אלא את התוכן שלו.
+4. מבצעים commit ל-branch הראשי, לרוב `main`.
+
+## פריסה ל-Streamlit Cloud
+
+1. נכנסים ל-Streamlit Community Cloud.
+2. לוחצים `Create app`.
+3. בוחרים `Deploy from GitHub repo`.
+4. בוחרים את ה-repository.
+5. בשדה Main file path כותבים:
 
 ```text
-Main file path: app.py
+app.py
 ```
 
-## Data note
+6. לוחצים Deploy.
 
-The included data is for demo only. Replace it with real market observations before making real purchasing decisions.
+## הערת אמינות נתונים
+
+הקובץ `sample_cars.csv` הוא מדגם הדגמה בלבד. הוא נועד לבדוק את המחשבון ואת מבנה הנתונים. לפני החלטות רכישה אמיתיות צריך להזין מדגם שוק רחב יותר: מודעות יד שנייה, מחירוני רכב, מחירי טרייד-אין, מחירי יבואן ותצפיות מכירה בפועל ככל שניתן להשיג.
+
+## עקרון החישוב
+
+המחשבון מחשב לכל אפשרות:
+
+- מחיר רכישה
+- הלוואה נדרשת
+- החזר חודשי
+- ריבית כוללת
+- ירידת ערך צפויה
+- שווי עתידי צפוי
+- עלות שימוש חודשית
+- עלות בעלות חודשית כוללת
+
+לאחר מכן הוא מדרג את האפשרויות לפי ציון עלות-תועלת, עם קנס לאפשרויות שעוברות את מגבלת ההחזר החודשי.

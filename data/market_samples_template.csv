@@ -1,0 +1,2 @@
+﻿record_id,source_type,source_name,observation_date,manufacturer,model,trim,model_year,category,powertrain,ownership_type,km,hand,msrp_new,asking_price,deal_price_est,trade_in_price_est,purchase_price,annual_depr_rate,risk_sigma,source_confidence,notes
+TEMPLATE001,Listing,Yad2/example,2026-06-12,Toyota,Corolla,Hybrid,2022,משפחתית קומפקטית,Hybrid,Private Used,65000,1,150000,120000,116000,108000,116000,0.08,0.08,0.5,שורת דוגמה בלבד — החלף בנתונים אמיתיים
