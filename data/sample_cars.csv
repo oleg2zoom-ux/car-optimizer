@@ -1,19 +1,27 @@
-﻿record_id,source_type,source_name,observation_date,manufacturer,model,trim,model_year,category,powertrain,ownership_type,km,hand,msrp_new,asking_price,deal_price_est,trade_in_price_est,purchase_price,annual_depr_rate,risk_sigma,source_confidence,notes
-D0001,Demo,MVP Sample,2026-06-12,MG,MG3+,Luxury,2026,סופר מיני,Hybrid,New,0,0,136000,136000,136000,0,136000,0.115,0.12,0.4,מחיר הדגמה
-D0002,Demo,MVP Sample,2026-06-12,Hyundai,Kona,Prestige,2025,קרוסאובר קטן,Hybrid,New,0,0,176600,176600,176600,0,176600,0.105,0.1,0.45,מחיר מבצע ידוע למשתמש
-D0003,Demo,MVP Sample,2026-06-12,Chery,Tiggo 4,Hybrid,2025,קרוסאובר קטן,Hybrid,New,0,0,136000,136000,136000,0,136000,0.135,0.16,0.35,מחיר הדגמה
-D0004,Demo,MVP Sample,2026-06-12,Jaecoo,7,PHEV,2025,קרוסאובר בינוני,PHEV,New,0,0,190000,190000,190000,0,190000,0.145,0.19,0.35,מחיר הדגמה
-D0005,Demo,MVP Sample,2026-06-12,Toyota,Yaris Cross,Hybrid,2025,קרוסאובר קטן,Hybrid,New,0,0,155000,155000,155000,0,155000,0.085,0.08,0.45,מחיר הדגמה
-D0006,Demo,MVP Sample,2026-06-12,Kia,Stonic,Urban,2025,קרוסאובר קטן,Gasoline,New,0,0,120000,120000,120000,0,120000,0.105,0.1,0.4,מחיר הדגמה
-D0007,Demo,MVP Sample,2026-06-12,Skoda,Kamiq,Ambition,2025,קרוסאובר קטן,Gasoline,New,0,0,135000,135000,135000,0,135000,0.105,0.1,0.4,מחיר הדגמה
-D0008,Demo,MVP Sample,2026-06-12,Skoda,Scala,Ambition,2025,משפחתית קומפקטית,Gasoline,New,0,0,125000,125000,125000,0,125000,0.105,0.1,0.4,מחיר הדגמה
-D0009,Demo,MVP Sample,2026-06-12,Mitsubishi,Outlander,Premium,2016,קרוסאובר 7 מקומות,Gasoline,Private Used,115000,1,170000,78000,78000,72000,78000,0.07,0.12,0.55,דוגמה לפי רכב שנמכר
-D0010,Demo,MVP Sample,2026-06-12,Toyota,Corolla,Hybrid,2022,משפחתית קומפקטית,Hybrid,Private Used,65000,1,150000,120000,118000,108000,118000,0.08,0.08,0.4,מחיר הדגמה
-D0011,Demo,MVP Sample,2026-06-12,Kia,Niro,HEV,2021,קרוסאובר קטן,Hybrid,Private Used,80000,2,150000,112000,110000,101000,110000,0.09,0.09,0.4,מחיר הדגמה
-D0012,Demo,MVP Sample,2026-06-12,Hyundai,Ioniq,Hybrid,2020,משפחתית קומפקטית,Hybrid,Private Used,95000,2,145000,87000,85000,78000,85000,0.085,0.09,0.4,מחיר הדגמה
-D0013,Demo,MVP Sample,2026-06-12,Tesla,Model 3,Standard Range,2022,משפחתית חשמלית,EV,Private Used,70000,1,230000,150000,145000,133000,145000,0.155,0.18,0.35,מחיר הדגמה
-D0014,Demo,MVP Sample,2026-06-12,BYD,Atto 3,Design,2023,קרוסאובר קטן,EV,Private Used,50000,1,165000,138000,135000,124000,135000,0.15,0.18,0.35,מחיר הדגמה
-D0015,Demo,MVP Sample,2026-06-12,Mazda,CX-5,Executive,2021,קרוסאובר בינוני,Gasoline,Private Used,70000,1,180000,128000,125000,116000,125000,0.095,0.1,0.4,מחיר הדגמה
-D0016,Demo,MVP Sample,2026-06-12,Nissan,Qashqai,Acenta,2020,קרוסאובר קטן,Gasoline,Private Used,90000,2,155000,90000,88000,81000,88000,0.105,0.12,0.35,מחיר הדגמה
-D0017,Demo,MVP Sample,2026-06-12,Hyundai,Tucson,Hybrid,2022,קרוסאובר בינוני,Hybrid,Private Used,65000,1,195000,155000,150000,138000,150000,0.095,0.1,0.4,מחיר הדגמה
-D0018,Demo,MVP Sample,2026-06-12,Kia,Sportage,Urban,2022,קרוסאובר בינוני,Gasoline,Private Used,68000,1,185000,142000,138000,127000,138000,0.1,0.11,0.4,מחיר הדגמה
+﻿record_id,source_type,source_name,observation_date,manufacturer,model,trim,model_year,vehicle_age_years,category,powertrain,ownership_type,km,hand,msrp_new,asking_price,deal_price_est,trade_in_price_est,purchase_price,annual_depr_rate,risk_sigma,source_confidence,notes
+D0001,Demo,MVP Sample,2026-06-12,MG,MG3+,Luxury,2026,0,סופר מיני,Hybrid,New,0,0,136000,136000,136000,0,136000,0.115,0.12,0.4,מחיר הדגמה
+D0002,Demo,MVP Sample,2026-06-12,Hyundai,Kona,Prestige,2025,1,קרוסאובר קטן,Hybrid,New,0,0,176600,176600,176600,0,176600,0.105,0.1,0.45,מחיר מבצע ידוע למשתמש
+D0003,Demo,MVP Sample,2026-06-12,Chery,Tiggo 4,Hybrid,2025,1,קרוסאובר קטן,Hybrid,New,0,0,136000,136000,136000,0,136000,0.135,0.16,0.35,מחיר הדגמה
+D0004,Demo,MVP Sample,2026-06-12,Jaecoo,7,PHEV,2025,1,קרוסאובר בינוני,PHEV,New,0,0,190000,190000,190000,0,190000,0.145,0.19,0.35,מחיר הדגמה
+D0005,Demo,MVP Sample,2026-06-12,Toyota,Yaris Cross,Hybrid,2025,1,קרוסאובר קטן,Hybrid,New,0,0,155000,155000,155000,0,155000,0.085,0.08,0.45,מחיר הדגמה
+D0006,Demo,MVP Sample,2026-06-12,Kia,Stonic,Urban,2025,1,קרוסאובר קטן,Gasoline,New,0,0,120000,120000,120000,0,120000,0.105,0.1,0.4,מחיר הדגמה
+D0007,Demo,MVP Sample,2026-06-12,Skoda,Kamiq,Ambition,2025,1,קרוסאובר קטן,Gasoline,New,0,0,135000,135000,135000,0,135000,0.105,0.1,0.4,מחיר הדגמה
+D0008,Demo,MVP Sample,2026-06-12,Skoda,Scala,Ambition,2025,1,משפחתית קומפקטית,Gasoline,New,0,0,125000,125000,125000,0,125000,0.105,0.1,0.4,מחיר הדגמה
+D0009,Demo,MVP Sample,2026-06-12,Opel,Frontera,Hybrid,2025,1,קרוסאובר בינוני,Hybrid,New,0,0,150000,150000,150000,0,150000,0.125,0.15,0.35,מחיר הדגמה
+D0010,Demo,MVP Sample,2026-06-12,Toyota,Corolla,Hybrid,2023,3,משפחתית קומפקטית,Hybrid,Private Used,45000,1,150000,125000,121000,112000,121000,0.08,0.08,0.45,משומש 3 שנים
+D0011,Demo,MVP Sample,2026-06-12,Hyundai,Kona,Hybrid,2023,3,קרוסאובר קטן,Hybrid,Private Used,50000,1,165000,132000,128000,118000,128000,0.095,0.1,0.42,משומש 3 שנים
+D0012,Demo,MVP Sample,2026-06-12,Kia,Niro,HEV,2023,3,קרוסאובר קטן,Hybrid,Private Used,52000,1,160000,126000,122000,112000,122000,0.09,0.09,0.42,משומש 3 שנים
+D0013,Demo,MVP Sample,2026-06-12,BYD,Atto 3,Design,2023,3,קרוסאובר קטן,EV,Private Used,50000,1,165000,138000,135000,124000,135000,0.15,0.18,0.35,משומש 3 שנים
+D0014,Demo,MVP Sample,2026-06-12,Toyota,Corolla,Hybrid,2021,5,משפחתית קומפקטית,Hybrid,Private Used,80000,2,145000,103000,99000,91000,99000,0.08,0.08,0.45,משומש 5 שנים
+D0015,Demo,MVP Sample,2026-06-12,Hyundai,Ioniq,Hybrid,2021,5,משפחתית קומפקטית,Hybrid,Private Used,85000,2,145000,97000,93000,85000,93000,0.085,0.09,0.42,משומש 5 שנים
+D0016,Demo,MVP Sample,2026-06-12,Mazda,CX-5,Executive,2021,5,קרוסאובר בינוני,Gasoline,Private Used,80000,1,180000,130000,125000,115000,125000,0.095,0.1,0.4,משומש 5 שנים
+D0017,Demo,MVP Sample,2026-06-12,Kia,Sportage,Urban,2021,5,קרוסאובר בינוני,Gasoline,Private Used,85000,2,175000,118000,114000,105000,114000,0.1,0.11,0.4,משומש 5 שנים
+D0018,Demo,MVP Sample,2026-06-12,Toyota,Yaris,Hybrid,2019,7,סופר מיני,Hybrid,Private Used,105000,2,115000,73000,70000,64000,70000,0.075,0.08,0.42,משומש 7 שנים
+D0019,Demo,MVP Sample,2026-06-12,Toyota,Corolla,Hybrid,2019,7,משפחתית קומפקטית,Hybrid,Private Used,110000,2,140000,79000,76000,70000,76000,0.08,0.09,0.42,משומש 7 שנים
+D0020,Demo,MVP Sample,2026-06-12,Nissan,Qashqai,Acenta,2019,7,קרוסאובר קטן,Gasoline,Private Used,110000,2,150000,74000,71000,65000,71000,0.105,0.12,0.35,משומש 7 שנים
+D0021,Demo,MVP Sample,2026-06-12,Mitsubishi,Outlander,Premium,2016,10,קרוסאובר 7 מקומות,Gasoline,Private Used,115000,1,170000,78000,76700,71000,76700,0.07,0.12,0.55,דוגמת רכב שנמכר
+D0022,Demo,MVP Sample,2026-06-12,Toyota,Auris,Hybrid,2016,10,משפחתית קומפקטית,Hybrid,Private Used,135000,2,135000,54000,51000,47000,51000,0.08,0.1,0.38,משומש 10 שנים
+D0023,Demo,MVP Sample,2026-06-12,Kia,Sportage,Urban,2016,10,קרוסאובר בינוני,Gasoline,Private Used,140000,2,155000,60000,57000,52000,57000,0.095,0.13,0.35,משומש 10 שנים
+D0024,Demo,MVP Sample,2026-06-12,Hyundai,i20,Inspire,2011,15,סופר מיני,Gasoline,Private Used,170000,3,95000,22000,20000,17000,20000,0.055,0.2,0.3,משומש 15 שנים
+D0025,Demo,MVP Sample,2026-06-12,Toyota,Corolla,GLI,2011,15,משפחתית קומפקטית,Gasoline,Private Used,180000,3,120000,30000,28000,24000,28000,0.055,0.18,0.32,משומש 15 שנים
+D0026,Demo,MVP Sample,2026-06-12,Honda,Civic,Comfort,2011,15,משפחתית קומפקטית,Gasoline,Private Used,175000,3,125000,32000,30000,26000,30000,0.055,0.18,0.32,משומש 15 שנים

@@ -1,293 +1,155 @@
 import streamlit as st
-import pandas as pd
-
-from car_optimizer.data_loader import load_market_data, validate_columns, REQUIRED_COLUMNS
-from car_optimizer.finance import monthly_payment, total_interest_paid
-from car_optimizer.optimizer import run_optimization
 from car_optimizer.constants import DEFAULTS
+from car_optimizer.data_loader import load_market_data, validate_columns, REQUIRED_COLUMNS
+from car_optimizer.optimizer import run_timing_optimization
 
-
-st.set_page_config(
-    page_title="מחשבון אופטימיזציית רכישת רכב",
-    page_icon="🚗",
-    layout="wide",
-    initial_sidebar_state="expanded",
-)
-
-
-RTL_CSS = """
+st.set_page_config(page_title="מחשבון תזמון והחלפת רכב", page_icon="🚗", layout="wide")
+st.markdown("""
 <style>
-html, body, [class*="css"] {
-    direction: rtl;
-    text-align: right;
-}
-section[data-testid="stSidebar"] {
-    direction: rtl;
-    text-align: right;
-}
-.stDataFrame, .dataframe {
-    direction: rtl;
-}
-div[data-testid="stMetric"] {
-    direction: rtl;
-    text-align: right;
-}
+html, body, [class*="css"] { direction: rtl; text-align: right; }
+section[data-testid="stSidebar"] { direction: rtl; text-align: right; }
+.stDataFrame, .dataframe { direction: rtl; }
+div[data-testid="stMetric"] { direction: rtl; text-align: right; }
 </style>
-"""
-st.markdown(RTL_CSS, unsafe_allow_html=True)
+""", unsafe_allow_html=True)
 
+st.title("🚗 מחשבון תזמון והחלפת רכב")
+st.caption("גרסה 0.3: בודק האם כדאי להישאר עם הרכב הקיים, מתי למכור אותו, ואיזו קנייה עתידית עומדת באילוצי הון עצמי והחזר חודשי.")
+with st.expander("מה השתנה בגרסה הזו?", expanded=False):
+    st.write("המודל מתמקד בהחלטת התזמון: להישאר עם הרכב הנוכחי ולשלם הלוואה קיימת, או למכור עכשיו/בעתיד ולהשתמש בכסף כמקדמה לרכב הבא.")
+    st.write("עלויות כמו דלק, ביטוח וטיפולים אינן נכנסות לציון המרכזי. הן מופיעות רק בלשונית נפרדת כאופציה עתידית.")
+    st.write("סליידרים בעייתיים הוחלפו בשדות מספריים ובבחירות קבועות, כדי שהערכים יהיו גלויים.")
 
-st.title("🚗 מחשבון אופטימיזציית רכישת רכב")
-st.caption(
-    "גרסת MVP: השוואת עלות בעלות חודשית צפויה לפי מחיר רכישה, ירידת ערך, "
-    "מימון, הון עצמי ועלויות שימוש."
-)
+tab_current, tab_next, tab_results, tab_optional, tab_data, tab_help = st.tabs([
+    "1. הרכב הקיים", "2. הרכב הבא והאילוצים", "3. תוצאות אופטימיזציה", "4. עלויות נלוות — אופציונלי", "5. נתונים", "עזרה"
+])
 
-with st.sidebar:
-    st.header("המצב הכספי שלי")
+with tab_current:
+    st.subheader("הרכב הקיים והלוואה קיימת")
+    c1,c2,c3=st.columns(3)
+    with c1:
+        current_vehicle_value=st.number_input("שווי מכירה ריאלי של הרכב הקיים היום", min_value=0, value=DEFAULTS['current_vehicle_value'], step=1000)
+    with c2:
+        current_vehicle_age_years=st.number_input("גיל הרכב הקיים בשנים", min_value=0.0, max_value=30.0, value=float(DEFAULTS['current_vehicle_age_years']), step=0.5)
+    with c3:
+        max_current_vehicle_age_years=st.number_input("גיל מקסימלי שאתה מוכן להישאר עם הרכב הקיים", min_value=1.0, max_value=30.0, value=float(DEFAULTS['max_current_vehicle_age_years']), step=0.5)
+    c4,c5,c6=st.columns(3)
+    with c4:
+        current_annual_depr_rate_percent=st.number_input("שחיקת מחיר שנתית משוערת של הרכב הקיים (%)", min_value=0.0, max_value=40.0, value=float(DEFAULTS['current_annual_depr_rate_percent']), step=0.5)
+    with c5:
+        timing_step_months=st.selectbox("רזולוציית בדיקת תזמון מכירה", options=[1,3,6,12], index=2)
+    with c6:
+        manual_max_wait_months=st.number_input("מקסימום המתנה ידני בחודשים", min_value=0, max_value=180, value=DEFAULTS['manual_max_wait_months'], step=3)
+    st.markdown('---')
+    has_existing_loan=st.checkbox("יש הלוואה קיימת על הרכב הנוכחי", value=DEFAULTS['has_existing_loan'])
+    if has_existing_loan:
+        l1,l2,l3,l4=st.columns(4)
+        with l1: existing_loan_balance=st.number_input("יתרת הלוואה קיימת", min_value=0, value=DEFAULTS['existing_loan_balance'], step=1000)
+        with l2: existing_monthly_payment=st.number_input("החזר חודשי קיים", min_value=0, value=DEFAULTS['existing_monthly_payment'], step=100)
+        with l3: existing_remaining_months=st.number_input("חודשים שנותרו בהלוואה הקיימת", min_value=0, max_value=180, value=DEFAULTS['existing_remaining_months'], step=1)
+        with l4: existing_interest_rate=st.number_input("ריבית שנתית משוערת בהלוואה הקיימת (%)", min_value=0.0, max_value=25.0, value=float(DEFAULTS['existing_interest_rate']), step=0.25)
+    else:
+        existing_loan_balance=0; existing_monthly_payment=0; existing_remaining_months=0; existing_interest_rate=0.0
+    st.info("המחשבון יבדוק נקודות זמן שונות למכירת הרכב הקיים: עכשיו, בעוד כמה חודשים, ועד גיל/חודש מקסימלי שהגדרת.")
 
-    current_car_sale = st.number_input(
-        "שווי מכירת הרכב הנוכחי",
-        min_value=0,
-        value=DEFAULTS["current_car_sale"],
-        step=1000,
-    )
-
-    extra_cash = st.number_input(
-        "הון עצמי נוסף שאני מוכן להוסיף",
-        min_value=0,
-        value=DEFAULTS["extra_cash"],
-        step=1000,
-    )
-
-    max_monthly_payment = st.number_input(
-        "החזר חודשי מקסימלי להלוואה",
-        min_value=0,
-        value=DEFAULTS["max_monthly_payment"],
-        step=100,
-    )
-
-    annual_interest_rate = st.number_input(
-        "ריבית שנתית משוערת (%)",
-        min_value=0.0,
-        value=float(DEFAULTS["annual_interest_rate"]),
-        step=0.25,
-    )
-
-    loan_months = st.slider(
-        "תקופת הלוואה בחודשים",
-        min_value=12,
-        max_value=120,
-        value=DEFAULTS["loan_months"],
-        step=12,
-    )
-
-    hold_years = st.slider(
-        "כמה שנים מתכננים להחזיק את הרכב?",
-        min_value=1,
-        max_value=10,
-        value=DEFAULTS["hold_years"],
-        step=1,
-    )
-
-    annual_km = st.number_input(
-        "ק״מ שנתי צפוי",
-        min_value=0,
-        value=DEFAULTS["annual_km"],
-        step=1000,
-    )
-
-    st.header("עלויות שימוש חודשיות")
-
-    insurance_monthly = st.number_input(
-        "ביטוח חודשי משוער",
-        min_value=0,
-        value=DEFAULTS["insurance_monthly"],
-        step=50,
-    )
-
-    maintenance_monthly = st.number_input(
-        "תחזוקה, טיפולים וצמיגים — חודשי",
-        min_value=0,
-        value=DEFAULTS["maintenance_monthly"],
-        step=50,
-    )
-
-    license_monthly = st.number_input(
-        "רישוי חודשי ממוצע",
-        min_value=0,
-        value=DEFAULTS["license_monthly"],
-        step=25,
-    )
-
-    energy_monthly = st.number_input(
-        "דלק / חשמל חודשי",
-        min_value=0,
-        value=DEFAULTS["energy_monthly"],
-        step=50,
-    )
-
-
-tab_input, tab_results, tab_data, tab_help = st.tabs(
-    ["טעינת נתונים וסינון", "תוצאות", "נתונים גולמיים", "עזרה"]
-)
-
-with tab_input:
-    st.subheader("מקור הנתונים")
-    uploaded_file = st.file_uploader(
-        "אפשר להעלות קובץ CSV או Excel לפי הסכמה. בלי העלאה — המחשבון משתמש במדגם הדגמה.",
-        type=["csv", "xlsx", "xls"],
-    )
-
-    data = load_market_data(uploaded_file)
-    errors = validate_columns(data)
-
+with tab_next:
+    st.subheader("הרכב הבא, מימון ואילוצים")
+    uploaded_file=st.file_uploader("אפשר להעלות CSV/Excel של נתוני שוק. בלי העלאה — נטען מדגם הדגמה.", type=['csv','xlsx','xls'])
+    market_data=load_market_data(uploaded_file)
+    errors=validate_columns(market_data)
     if errors:
-        st.error("הקובץ לא מתאים לסכמה הנדרשת.")
-        for err in errors:
-            st.write(f"• {err}")
+        st.error("קובץ הנתונים לא מתאים לסכמה.")
+        for e in errors: st.write('• '+e)
         st.stop()
-
-    st.success(f"נטענו {len(data):,} תצפיות רכב.")
-
-    col1, col2, col3 = st.columns(3)
-
-    with col1:
-        categories = sorted(data["category"].dropna().unique().tolist())
-        selected_categories = st.multiselect(
-            "קטגוריית רכב",
-            options=categories,
-            default=categories,
-        )
-
-    with col2:
-        powertrains = sorted(data["powertrain"].dropna().unique().tolist())
-        selected_powertrains = st.multiselect(
-            "סוג הנעה",
-            options=powertrains,
-            default=powertrains,
-        )
-
-    with col3:
-        ownership_types = sorted(data["ownership_type"].dropna().unique().tolist())
-        selected_ownerships = st.multiselect(
-            "סוג בעלות / מקור",
-            options=ownership_types,
-            default=ownership_types,
-        )
-
-    min_year = int(data["model_year"].min())
-    max_year = int(data["model_year"].max())
-    default_min_year = max(min_year, max_year - 8)
-
-    year_range = st.slider(
-        "טווח שנתונים",
-        min_value=min_year,
-        max_value=max_year,
-        value=(default_min_year, max_year),
-        step=1,
-    )
-
-    max_purchase_price = st.number_input(
-        "מחיר רכישה מקסימלי לבדיקה",
-        min_value=0,
-        value=int(max(data["purchase_price"].max(), 200000)),
-        step=5000,
-    )
-
-    filtered = data[
-        data["category"].isin(selected_categories)
-        & data["powertrain"].isin(selected_powertrains)
-        & data["ownership_type"].isin(selected_ownerships)
-        & data["model_year"].between(year_range[0], year_range[1])
-        & (data["purchase_price"] <= max_purchase_price)
+    st.success(f"נטענו {len(market_data):,} אפשרויות רכב מהמאגר.")
+    m1,m2,m3,m4=st.columns(4)
+    with m1: extra_cash_at_purchase=st.number_input("הון עצמי נוסף לרכב הבא", min_value=0, value=DEFAULTS['extra_cash_at_purchase'], step=1000)
+    with m2: max_monthly_payment=st.number_input("תקרת החזר חודשית לרכב הבא", min_value=0, value=DEFAULTS['max_monthly_payment'], step=100)
+    with m3: next_interest_rate=st.number_input("ריבית שנתית למימון הרכב הבא (%)", min_value=0.0, max_value=25.0, value=float(DEFAULTS['next_interest_rate']), step=0.25)
+    with m4: next_loan_months=st.selectbox("תקופת מימון לרכב הבא", options=[12,24,36,48,60,72,84,96,108,120], index=4)
+    h1,h2,h3=st.columns(3)
+    with h1: next_hold_years=st.selectbox("כמה שנים להחזיק את הרכב הבא?", options=[1,2,3,4,5,6,7,8,10], index=4)
+    with h2: max_purchase_price=st.number_input("מחיר רכישה מקסימלי לרכב הבא", min_value=0, value=DEFAULTS['max_purchase_price'], step=5000)
+    with h3: annual_km=st.number_input("ק״מ שנתי צפוי", min_value=0, value=DEFAULTS['annual_km'], step=1000, help="משפיע רק על שחיקת מחיר. לא מחושב דלק.")
+    st.markdown('---')
+    st.subheader("העדפות לרכב הבא")
+    f1,f2,f3=st.columns(3)
+    with f1: purchase_type=st.radio("סוג רכישה", options=["הכול","חדש בלבד","משומש בלבד"], index=0, horizontal=True)
+    with f2: max_used_age=st.selectbox("גיל מקסימלי לרכב משומש שאפשר לקנות", options=[3,5,7,10,15], index=1)
+    with f3: allow_negative_equity_roll=st.checkbox("לאפשר גלגול יתרת הלוואה שלילית למימון הבא", value=True)
+    c1,c2,c3=st.columns(3)
+    with c1:
+        cats=sorted(market_data['category'].dropna().unique().tolist())
+        selected_categories=st.multiselect("קטגוריית רכב", options=cats, default=cats)
+    with c2:
+        powers=sorted(market_data['powertrain'].dropna().unique().tolist())
+        selected_powertrains=st.multiselect("סוג הנעה", options=powers, default=powers)
+    with c3:
+        owns=sorted(market_data['ownership_type'].dropna().unique().tolist())
+        selected_ownership_types=st.multiselect("מקור/סוג בעלות", options=owns, default=owns)
+    filtered_data=market_data[
+        market_data['category'].isin(selected_categories) & market_data['powertrain'].isin(selected_powertrains) & market_data['ownership_type'].isin(selected_ownership_types) & (market_data['purchase_price']<=max_purchase_price)
     ].copy()
+    if purchase_type=="חדש בלבד": filtered_data=filtered_data[filtered_data['vehicle_age_years']==0].copy()
+    elif purchase_type=="משומש בלבד": filtered_data=filtered_data[(filtered_data['vehicle_age_years']>0)&(filtered_data['vehicle_age_years']<=max_used_age)].copy()
+    else: filtered_data=filtered_data[(filtered_data['vehicle_age_years']==0)|((filtered_data['vehicle_age_years']>0)&(filtered_data['vehicle_age_years']<=max_used_age))].copy()
+    st.info(f"לאחר סינון נותרו {len(filtered_data):,} אפשרויות רכב לבדיקה.")
 
-    st.info(f"לאחר סינון נותרו {len(filtered):,} אפשרויות.")
-
-
-params = {
-    "current_car_sale": current_car_sale,
-    "extra_cash": extra_cash,
-    "max_monthly_payment": max_monthly_payment,
-    "annual_interest_rate": annual_interest_rate,
-    "loan_months": loan_months,
-    "hold_years": hold_years,
-    "annual_km": annual_km,
-    "insurance_monthly": insurance_monthly,
-    "maintenance_monthly": maintenance_monthly,
-    "license_monthly": license_monthly,
-    "energy_monthly": energy_monthly,
+params={
+    'current_vehicle_value':current_vehicle_value,
+    'current_vehicle_age_years':current_vehicle_age_years,
+    'max_current_vehicle_age_years':max_current_vehicle_age_years,
+    'current_annual_depr_rate':current_annual_depr_rate_percent/100,
+    'timing_step_months':timing_step_months,
+    'manual_max_wait_months':manual_max_wait_months,
+    'has_existing_loan':has_existing_loan,
+    'existing_loan_balance':existing_loan_balance,
+    'existing_monthly_payment':existing_monthly_payment,
+    'existing_remaining_months':existing_remaining_months,
+    'existing_interest_rate':existing_interest_rate,
+    'extra_cash_at_purchase':extra_cash_at_purchase,
+    'max_monthly_payment':max_monthly_payment,
+    'next_interest_rate':next_interest_rate,
+    'next_loan_months':next_loan_months,
+    'next_hold_years':next_hold_years,
+    'annual_km':annual_km,
+    'allow_negative_equity_roll':allow_negative_equity_roll,
 }
-
-if "filtered" not in locals():
-    filtered = data.copy()
-
-results = run_optimization(filtered, params)
 
 with tab_results:
-    st.subheader("המלצה כלכלית")
-
+    st.subheader("תוצאות אופטימיזציה")
+    results=run_timing_optimization(filtered_data, params)
     if results.empty:
-        st.warning("אין תוצאות לפי הסינון הנוכחי.")
+        st.warning("אין תוצאות לפי האילוצים והסינונים הנוכחיים.")
     else:
-        best = results.iloc[0]
-
-        c1, c2, c3, c4 = st.columns(4)
-        with c1:
-            st.metric("האופציה המובילה", f"{best['יצרן']} {best['דגם']}")
-        with c2:
-            st.metric("החזר חודשי", f"{best['החזר חודשי']:,.0f} ₪")
-        with c3:
-            st.metric("עלות בעלות חודשית", f"{best['עלות בעלות חודשית']:,.0f} ₪")
-        with c4:
-            st.metric("שווי עתידי צפוי", f"{best['שווי עתידי צפוי']:,.0f} ₪")
-
-        if best["עובר מגבלת החזר"] == "כן":
-            st.success("האופציה המובילה עומדת במגבלת ההחזר החודשי שהוגדרה.")
-        else:
-            st.warning("האופציה המובילה כלכלית, אבל אינה עומדת במגבלת ההחזר החודשי.")
-
-        st.subheader("דירוג אפשרויות")
+        best=results.iloc[0]
+        r1,r2,r3,r4=st.columns(4)
+        with r1: st.metric("המלצת תזמון", best['המלצת תזמון'])
+        with r2: st.metric("הרכב הבא", f"{best['יצרן']} {best['דגם']}")
+        with r3: st.metric("החזר חודשי לרכב הבא", f"{best['החזר חודשי הבא']:,.0f} ₪")
+        with r4: st.metric("עלות חודשית כלכלית", f"{best['עלות חודשית כלכלית']:,.0f} ₪")
+        st.write(f"נקודת המכירה המומלצת לפי המודל: **{best['חודשי המתנה עד מכירה']} חודשים**. שווי מכירה צפוי של הרכב הקיים אז: **{best['שווי רכב קיים בעת מכירה']:,.0f} ₪**.")
+        if best['עומד באילוץ החזר']=='כן': st.success("האפשרות המובילה עומדת בתקרת ההחזר החודשי שהגדרת.")
+        else: st.warning("האפשרות המובילה כלכלית, אך אינה עומדת בתקרת ההחזר החודשי.")
+        st.subheader("דירוג מלא")
         st.dataframe(results, use_container_width=True, hide_index=True)
+        st.subheader("גרף — האפשרויות הזולות ביותר לפי עלות חודשית כלכלית")
+        chart=results.head(15).copy(); chart['שם']=chart['המלצת תזמון'].astype(str)+' | '+chart['יצרן'].astype(str)+' '+chart['דגם'].astype(str)+' '+chart['שנתון'].astype(str)
+        st.bar_chart(chart.set_index('שם')['עלות חודשית כלכלית'])
+        st.download_button("הורדת התוצאות כ-CSV", data=results.to_csv(index=False).encode('utf-8-sig'), file_name='car_timing_optimizer_results.csv', mime='text/csv')
 
-        st.subheader("גרף עלות בעלות חודשית — 15 האפשרויות הראשונות")
-        chart = results.head(15).copy()
-        chart["שם"] = (
-            chart["יצרן"].astype(str)
-            + " "
-            + chart["דגם"].astype(str)
-            + " "
-            + chart["שנתון"].astype(str)
-        )
-        st.bar_chart(chart.set_index("שם")["עלות בעלות חודשית"])
-
-        csv_bytes = results.to_csv(index=False).encode("utf-8-sig")
-        st.download_button(
-            "הורדת תוצאות כ-CSV",
-            data=csv_bytes,
-            file_name="car_optimizer_results.csv",
-            mime="text/csv",
-        )
-
+with tab_optional:
+    st.subheader("עלויות נלוות — לא חלק מהאופטימיזציה הראשית")
+    st.write("כאן אפשר בעתיד להוסיף ביטוח, דלק, חשמל, טיפולים, צמיגים ואגרות. בגרסה הזו הן לא נכנסות לציון המרכזי, בהתאם לבקשתך.")
+    st.info("הסיבה: בהחלטת תזמון מכירה וקנייה רצינו להתמקד בשחיקת מחיר, הלוואה, תשלום חודשי ותזמון.")
 with tab_data:
-    st.subheader("הנתונים שהמחשבון משתמש בהם")
-    st.dataframe(data, use_container_width=True, hide_index=True)
-
+    st.subheader("הנתונים שהאפליקציה משתמשת בהם")
+    st.dataframe(market_data, use_container_width=True, hide_index=True)
     st.subheader("עמודות חובה")
-    st.write(", ".join(REQUIRED_COLUMNS))
-
+    st.write(', '.join(REQUIRED_COLUMNS))
 with tab_help:
-    st.subheader("איך לקרוא את התוצאה?")
-    st.write(
-        "המחשבון לא בוחר את הרכב הכי יפה או הכי מפנק. הוא מדרג לפי עלות בעלות חודשית צפויה "
-        "תחת מגבלות ההון העצמי, הריבית וההחזר החודשי."
-    )
-    st.write(
-        "עלות בעלות חודשית כוללת ירידת ערך צפויה, ריבית מימון ועלויות שוטפות. "
-        "שווי עתידי מחושב לפי מקדם שחיקה שנתי וסיכון סטטיסטי."
-    )
-    st.warning(
-        "בגרסה זו הנתונים הם מדגם הדגמה בלבד. לפני החלטת רכישה אמיתית צריך להזין נתוני שוק אמיתיים "
-        "ממחירוני רכב, מודעות, טרייד-אין ומקורות נוספים."
-    )
+    st.subheader("מה המודל עושה?")
+    st.write("המודל עובר על נקודות זמן אפשריות למכירת הרכב הקיים: עכשיו, בעוד כמה חודשים, ועד מגבלת הגיל/המתנה שהוגדרה.")
+    st.write("בכל נקודת זמן הוא מעריך את שווי הרכב הקיים, יתרת ההלוואה שתישאר, ההון שישמש כמקדמה, ואת ההחזר החודשי על הרכב הבא.")
+    st.write("לאחר מכן הוא מדרג כל שילוב של תזמון מכירה + רכב הבא לפי עלות חודשית כלכלית, עם קנס כבד לאפשרויות שעוברות את תקרת ההחזר.")
+    st.warning("הנתונים במדגם הם הדגמה בלבד. כדי להפוך את המחשבון לכלי החלטה אמיתי, צריך להזין נתוני שוק אמיתיים.")

@@ -1,15 +1,20 @@
-DEFAULTS = {
-    "current_car_sale": 80000,
-    "extra_cash": 20000,
-    "max_monthly_payment": 2300,
-    "annual_interest_rate": 7.0,
-    "loan_months": 60,
-    "hold_years": 5,
-    "annual_km": 18000,
-    "insurance_monthly": 450,
-    "maintenance_monthly": 250,
-    "license_monthly": 150,
-    "energy_monthly": 700,
-}
-
 CURRENT_YEAR = 2026
+DEFAULTS = {
+    "current_vehicle_value": 80000,
+    "current_vehicle_age_years": 10.0,
+    "max_current_vehicle_age_years": 15.0,
+    "current_annual_depr_rate_percent": 7.0,
+    "manual_max_wait_months": 60,
+    "has_existing_loan": False,
+    "existing_loan_balance": 0,
+    "existing_monthly_payment": 0,
+    "existing_remaining_months": 0,
+    "existing_interest_rate": 7.0,
+    "extra_cash_at_purchase": 20000,
+    "max_monthly_payment": 2300,
+    "next_interest_rate": 7.0,
+    "next_loan_months": 60,
+    "next_hold_years": 5,
+    "annual_km": 18000,
+    "max_purchase_price": 250000,
+}
