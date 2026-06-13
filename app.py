@@ -1,20 +1,20 @@
 from datetime import date
 
-import pandas as pd
 import streamlit as st
 
-from car_optimizer.constants import DEFAULTS
+from car_optimizer.constants import DEFAULTS, PRIORITY_LABELS
 from car_optimizer.data_loader import (
     load_replacement_options,
     load_vehicle_reference,
     validate_replacement_columns,
 )
+from car_optimizer.filters import apply_high_level_category_filter
 from car_optimizer.optimizer import run_owner_first_optimization
 from car_optimizer.valuation_model import estimate_current_vehicle_value
 
 
 st.set_page_config(
-    page_title="מחשבון החלטת החלפת רכב",
+    page_title="מחשבון החלפת רכב — Owner First",
     page_icon="🚗",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -49,45 +49,99 @@ today = date.today()
 
 st.title("🚗 מחשבון החלטת החלפת רכב")
 st.caption(
-    "גרסה 0.4: מתחילים מהרכב הקיים של הבעלים, מזהים רפרנס, מעריכים שווי, "
-    "בודקים הלוואה קיימת, חיסכון עתידי, סיכון גיל/אחריות, ומוצאים מועד החלפה אופטימלי."
+    "v0.7 — מתחילים מבחירת קטגוריה ועדיפות החלטה, ואז הרכב הקיים, הלוואה, חיסכון, "
+    "רכב הבא, אילוץ החזר חודשי ומיון התרחישים."
 )
 
 vehicle_ref = load_vehicle_reference()
 
-tab_owner, tab_current_loan, tab_next, tab_results, tab_data, tab_help = st.tabs(
+tab_strategy, tab_owner, tab_current_loan, tab_next, tab_results, tab_data, tab_help = st.tabs(
     [
-        "1. הרכב הקיים",
-        "2. הלוואה וחיסכון",
-        "3. הרכב הבא והאילוצים",
-        "4. המלצה ותוצאות",
-        "5. נתונים",
+        "1. קטגוריה ועדיפות",
+        "2. הרכב הקיים",
+        "3. הלוואה וחיסכון",
+        "4. הרכב הבא והאילוצים",
+        "5. המלצה ותוצאות",
+        "6. נתונים",
         "עזרה",
     ]
 )
 
+with tab_strategy:
+    st.subheader("בחירת קטגוריה ראשית ועדיפות חישוב")
+
+    s1, s2, s3 = st.columns(3)
+
+    with s1:
+        high_level_category = st.radio(
+            "איזו קטגוריית רכב אתה מחפש?",
+            options=["מיני", "משפחתי", "פנאי שטח"],
+            index=2,
+            help="הסינון הזה מתבצע לפני כל חישוב אחר.",
+        )
+
+    with s2:
+        decision_priority_label = st.selectbox(
+            "מה עדיפות המיון?",
+            options=list(PRIORITY_LABELS.keys()),
+            index=0,
+        )
+        decision_priority = PRIORITY_LABELS[decision_priority_label]
+
+    with s3:
+        min_source_confidence = st.slider(
+            "רמת אמינות מינימלית לנתוני מחיר",
+            min_value=0.0,
+            max_value=1.0,
+            value=0.50,
+            step=0.05,
+            help="0.85 ומעלה = מחירים מאומתים יחסית. 0.50 מאפשר גם seed רחב יותר.",
+        )
+
+    include_needs_review = st.checkbox(
+        "להציג גם שורות מחיר שדורשות אימות",
+        value=True,
+        help="כדאי להשאיר פעיל לבדיקות רחבות, אבל בהחלטת רכישה אמיתית עדיף לסנן אותן.",
+    )
+
+    st.info(
+        f"המודל יסנן קודם את קטגוריית **{high_level_category}** ואז ימיין לפי עדיפות: "
+        f"**{decision_priority_label}**."
+    )
+
+    if include_needs_review:
+        st.warning(
+            "שים לב: חלק גדול ממאגר v0.6 הוא seed להרחבת הנתונים ומסומן needs_review='כן'. "
+            "המודל נותן קנס לשורות כאלה, אבל הן עדיין מופיעות אם מאפשרים אותן."
+        )
+
 with tab_owner:
     st.subheader("זיהוי הרכב הקיים")
 
-    manufacturers = sorted(vehicle_ref["manufacturer"].dropna().unique().tolist())
-    selected_manufacturer = st.selectbox("יצרן", manufacturers)
+    filtered_ref = apply_high_level_category_filter(vehicle_ref, high_level_category, category_column="category")
+    if filtered_ref.empty:
+        st.warning("אין רכב רפרנס בקטגוריה שנבחרה. מוצג כל המאגר.")
+        filtered_ref = vehicle_ref.copy()
+
+    manufacturers = sorted(filtered_ref["manufacturer"].dropna().astype(str).unique().tolist())
+    selected_manufacturer = st.selectbox("יצרן / מותג", manufacturers)
 
     models = sorted(
-        vehicle_ref.loc[
-            vehicle_ref["manufacturer"] == selected_manufacturer, "model"
-        ].dropna().unique().tolist()
+        filtered_ref.loc[
+            filtered_ref["manufacturer"].astype(str) == selected_manufacturer, "model"
+        ].dropna().astype(str).unique().tolist()
     )
     selected_model = st.selectbox("דגם", models)
 
-    ref_subset = vehicle_ref[
-        (vehicle_ref["manufacturer"] == selected_manufacturer)
-        & (vehicle_ref["model"] == selected_model)
+    ref_subset = filtered_ref[
+        (filtered_ref["manufacturer"].astype(str) == selected_manufacturer)
+        & (filtered_ref["model"].astype(str) == selected_model)
     ].copy()
 
-    trims = sorted(ref_subset["trim"].dropna().unique().tolist())
+    trims = sorted(ref_subset["trim"].fillna("").astype(str).unique().tolist())
     selected_trim = st.selectbox("רמת גימור / משפחת דגם", trims)
 
-    selected_ref = ref_subset[ref_subset["trim"] == selected_trim].iloc[0]
+    selected_ref = ref_subset[ref_subset["trim"].fillna("").astype(str) == selected_trim].iloc[0]
 
     c1, c2, c3, c4 = st.columns(4)
     with c1:
@@ -95,7 +149,7 @@ with tab_owner:
             "שנתון הרכב",
             min_value=1990,
             max_value=today.year + 1,
-            value=int(DEFAULTS["current_model_year"]),
+            value=min(max(int(DEFAULTS["current_model_year"]), 1990), today.year + 1),
             step=1,
         )
     with c2:
@@ -153,7 +207,7 @@ with tab_owner:
             min_value=0,
             value=DEFAULTS["known_current_value"],
             step=1000,
-            help="אם אתה יודע מחירון/מחיר מכירה ריאלי — הזן. אחרת המודל יחשב.",
+            help="אם יש לך מחירון/מחיר מכירה ריאלי — הזן. אחרת המודל יחשב.",
         )
     with k2:
         current_value_safety_margin = st.number_input(
@@ -162,7 +216,6 @@ with tab_owner:
             max_value=30.0,
             value=float(DEFAULTS["current_value_safety_margin_percent"]),
             step=1.0,
-            help="מפחית את שווי הרכב לצורך החלטה שמרנית.",
         )
 
     current_info = {
@@ -184,15 +237,15 @@ with tab_owner:
     estimated = estimate_current_vehicle_value(current_info, today)
 
     st.info(
-        f"שווי נוכחי משוער לאחר מרווח שמרנות: **{estimated['estimated_value_after_margin']:,.0f} ₪**. "
+        f"שווי נוכחי משוער לאחר שמרנות: **{estimated['estimated_value_after_margin']:,.0f} ₪**. "
         f"גיל רכב מחושב: **{estimated['vehicle_age_years']:.1f} שנים**. "
         f"שיטת הערכה: **{estimated['method']}**."
     )
 
     st.write(
-        f"אחריות יצרן לפי רפרנס: **{selected_ref['warranty_years']} שנים**. "
-        f"תמיכת חלפים רפרנס: **{selected_ref['parts_support_years']} שנים**. "
-        f"מקדם סיכון בסיסי: **{selected_ref['reliability_risk_factor']}**."
+        f"אחריות יצרן ברפרנס: **{estimated['warranty_years']:.0f} שנים**. "
+        f"תמיכת חלפים ברפרנס: **{estimated['parts_support_years']:.0f} שנים**. "
+        f"מקדם סיכון: **{estimated['reliability_risk_factor']}**."
     )
 
 with tab_current_loan:
@@ -258,24 +311,18 @@ with tab_current_loan:
             min_value=0,
             value=DEFAULTS["monthly_saving_capacity"],
             step=100,
-            help="חיסכון מעבר להחזר ההלוואה הקיימת.",
         )
     with s3:
         redirect_finished_loan_to_savings = st.checkbox(
-            "לאחר סיום ההלוואה הקיימת — להפנות את ההחזר לחיסכון לרכב הבא",
+            "אחרי סיום ההלוואה — להפנות את ההחזר לחיסכון לרכב הבא",
             value=True,
         )
-
-    st.info(
-        "אם ההלוואה הקיימת נגמרת לפני מועד ההחלפה, המודל יכול להמליץ להמשיך לחסוך "
-        "עוד מספר חודשים כדי להקטין את המימון לרכב הבא."
-    )
 
 with tab_next:
     st.subheader("הרכב הבא והאילוצים")
 
     uploaded_file = st.file_uploader(
-        "אפשר להעלות קובץ אפשרויות רכישה CSV/Excel. בלי העלאה — נטען מדגם הדגמה.",
+        "אפשר להעלות CSV/Excel של אפשרויות רכישה. בלי העלאה — נטען המאגר המצורף v0.6.",
         type=["csv", "xlsx", "xls"],
     )
 
@@ -287,6 +334,22 @@ with tab_next:
         for err in errors:
             st.write(f"• {err}")
         st.stop()
+
+    replacement_options = apply_high_level_category_filter(
+        replacement_options,
+        high_level_category,
+        category_column="category",
+    )
+
+    if "source_confidence" in replacement_options.columns:
+        replacement_options = replacement_options[
+            replacement_options["source_confidence"].fillna(0) >= min_source_confidence
+        ].copy()
+
+    if not include_needs_review and "needs_review" in replacement_options.columns:
+        replacement_options = replacement_options[
+            replacement_options["needs_review"].fillna("כן").astype(str) != "כן"
+        ].copy()
 
     n1, n2, n3 = st.columns(3)
     with n1:
@@ -351,27 +414,26 @@ with tab_next:
             "רגישות לסיכון גיל/אחריות",
             options=["נמוכה", "בינונית", "גבוהה"],
             index=1,
-            help="רגישות גבוהה מענישה יותר רכבים מחוץ לאחריות/מעל 7 שנים.",
         )
 
     st.markdown("---")
-    st.subheader("סינון סוג רכב")
+    st.subheader("סינון נוסף")
 
     c1, c2, c3 = st.columns(3)
     with c1:
-        categories = sorted(replacement_options["category"].dropna().unique().tolist())
-        selected_categories = st.multiselect("קטגוריה", categories, default=categories)
+        categories = sorted(replacement_options["category"].dropna().astype(str).unique().tolist())
+        selected_categories = st.multiselect("קטגוריה מפורטת", categories, default=categories)
     with c2:
-        powertrains = sorted(replacement_options["powertrain"].dropna().unique().tolist())
+        powertrains = sorted(replacement_options["powertrain"].dropna().astype(str).unique().tolist())
         selected_powertrains = st.multiselect("הנעה", powertrains, default=powertrains)
     with c3:
-        ownerships = sorted(replacement_options["ownership_type"].dropna().unique().tolist())
+        ownerships = sorted(replacement_options["ownership_type"].dropna().astype(str).unique().tolist())
         selected_ownerships = st.multiselect("מקור/בעלות", ownerships, default=ownerships)
 
     filtered_options = replacement_options[
-        replacement_options["category"].isin(selected_categories)
-        & replacement_options["powertrain"].isin(selected_powertrains)
-        & replacement_options["ownership_type"].isin(selected_ownerships)
+        replacement_options["category"].astype(str).isin(selected_categories)
+        & replacement_options["powertrain"].astype(str).isin(selected_powertrains)
+        & replacement_options["ownership_type"].astype(str).isin(selected_ownerships)
         & (replacement_options["purchase_price"] <= max_purchase_price)
     ].copy()
 
@@ -391,8 +453,6 @@ with tab_next:
             )
         ].copy()
 
-    st.info(f"לאחר סינון נותרו {len(filtered_options):,} אפשרויות רכישה.")
-
     t1, t2 = st.columns(2)
     with t1:
         max_wait_months = st.number_input(
@@ -409,8 +469,10 @@ with tab_next:
             index=2,
         )
 
+    st.info(f"לאחר כל הסינונים נותרו {len(filtered_options):,} אפשרויות רכישה.")
+
 with tab_results:
-    st.subheader("המלצה")
+    st.subheader("המלצה ותוצאות")
 
     params = {
         "today": today,
@@ -433,6 +495,7 @@ with tab_results:
         "risk_tolerance": risk_tolerance,
         "max_wait_months": int(max_wait_months),
         "timing_step_months": int(timing_step_months),
+        "decision_priority": decision_priority,
     }
 
     results = run_owner_first_optimization(filtered_options, params)
@@ -455,9 +518,9 @@ with tab_results:
         st.success(best["נימוק המלצה"])
 
         st.write(
+            f"עדיפות מיון: **{decision_priority_label}**. "
             f"החזר חודשי צפוי לרכב הבא: **{best['החזר חודשי לרכב הבא']:,.0f} ₪**. "
-            f"הון עצמי צפוי במועד הקנייה: **{best['הון עצמי צפוי במועד קנייה']:,.0f} ₪**. "
-            f"שווי הרכב הקיים במועד מכירה: **{best['שווי רכב קיים במועד מכירה']:,.0f} ₪**."
+            f"הון עצמי צפוי במועד הקנייה: **{best['הון עצמי צפוי במועד קנייה']:,.0f} ₪**."
         )
 
         if best["עומד בתקרת החזר"] == "כן":
@@ -479,38 +542,34 @@ with tab_results:
             + " "
             + chart["שנתון"].astype(str)
         )
-        st.bar_chart(chart.set_index("תרחיש")["עלות חודשית כלכלית"])
+        st.bar_chart(chart.set_index("תרחיש")["ציון עדיפות"])
 
         csv_bytes = results.to_csv(index=False).encode("utf-8-sig")
         st.download_button(
             "הורדת תוצאות כ-CSV",
             data=csv_bytes,
-            file_name="owner_first_car_optimizer_results.csv",
+            file_name="owner_first_car_optimizer_results_v0_7.csv",
             mime="text/csv",
         )
 
 with tab_data:
-    st.subheader("מאגר רפרנס רכבים")
+    st.subheader("מאגר רפרנס לרכב קיים")
     st.dataframe(vehicle_ref, use_container_width=True, hide_index=True)
 
     st.subheader("אפשרויות רכישה")
-    st.dataframe(replacement_options, use_container_width=True, hide_index=True)
+    st.dataframe(load_replacement_options(None), use_container_width=True, hide_index=True)
 
 with tab_help:
-    st.subheader("מה המודל עושה?")
+    st.subheader("איך המיון עובד?")
     st.write(
-        "המודל מתחיל מהרכב הקיים שלך. הוא מעריך שווי נוכחי לפי מחיר ידוע, מחיר רכישה, "
-        "מחיר חדש או רפרנס פחת."
+        "המודל תמיד מחשב קודם עלות חודשית כלכלית, החזר חודשי, שווי רכב קיים, יתרת הלוואה, "
+        "הון עצמי צפוי, שווי עתידי וסיכון גיל/אחריות."
     )
     st.write(
-        "לאחר מכן הוא בודק נקודות החלפה אפשריות: עכשיו, אחרי סיום הלוואה, אחרי עוד כמה חודשי חיסכון, "
-        "ולפי מדרגות גיל/אחריות כגון 3, 5, 7, 10 ו-15 שנים."
+        "לאחר מכן הוא משנה את הציון לפי עדיפות המשתמש: חדש ככל האפשר, אמין ביותר, "
+        "או שמירת ערך עתידית."
     )
     st.write(
-        "בכל תרחיש מחושבים: שווי הרכב הקיים במועד המכירה, יתרת הלוואה, הון עצמי זמין, "
-        "מימון נדרש לרכב הבא, החזר חודשי, ירידת ערך וסיכון גיל/אחריות."
-    )
-    st.warning(
-        "קנס סיכון גיל/אחריות אינו הוצאה ודאית. זהו רכיב החלטה שמטרתו למנוע מהמודל להמליץ אוטומטית "
-        "להחזיק רכב ישן מאוד רק כי הפחת שלו נמוך."
+        "שורות מחיר עם needs_review='כן' מקבלות קנס בדירוג. אם רוצים החלטה שמרנית, "
+        "אפשר להוריד אותן באמצעות הסינון במסך הראשון."
     )
