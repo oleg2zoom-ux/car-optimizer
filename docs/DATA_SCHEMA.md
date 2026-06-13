@@ -1,26 +1,9 @@
 # Data schema
 
-## vehicle_reference.csv
+The app reads `data/replacement_options.csv` by default.
 
-Reference table for identifying the current vehicle.
-
-Important columns:
-- manufacturer
-- model
-- trim
-- category
-- powertrain
-- msrp_reference
-- annual_depr_rate
-- warranty_years
-- parts_support_years
-- reliability_risk_factor
-
-## replacement_options.csv
-
-Purchase options for the next car.
-
-Important columns:
+Required columns:
+- record_id
 - manufacturer
 - model
 - trim
@@ -29,9 +12,23 @@ Important columns:
 - category
 - powertrain
 - ownership_type
+- km
+- hand
 - purchase_price
 - annual_depr_rate
 - risk_sigma
 - warranty_years
 - parts_support_years
 - reliability_risk_factor
+- source_type
+- source_confidence
+
+Recommended columns:
+- importer
+- brand
+- new_price_reference_ils
+- license_fee_ils
+- source_url
+- needs_review
+- notes
+- observation_date

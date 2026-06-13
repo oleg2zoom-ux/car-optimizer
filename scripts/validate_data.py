@@ -16,7 +16,9 @@ def main(path: str) -> int:
         return 1
 
     if file_path.suffix.lower() in [".xlsx", ".xls"]:
-        df = pd.read_excel(file_path)
+        xls = pd.ExcelFile(file_path)
+        sheet_name = "App_Replacement_Options" if "App_Replacement_Options" in xls.sheet_names else xls.sheet_names[0]
+        df = pd.read_excel(file_path, sheet_name=sheet_name)
     else:
         df = pd.read_csv(file_path)
 
@@ -37,4 +39,5 @@ if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Usage: python scripts/validate_data.py data/replacement_options.csv")
         raise SystemExit(1)
+
     raise SystemExit(main(sys.argv[1]))

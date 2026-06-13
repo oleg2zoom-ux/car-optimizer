@@ -1,11 +1,16 @@
 # Changelog
 
-## v0.4.0
+## v0.7.0
 
-- Owner-first flow.
-- Current vehicle reference database.
-- Automatic current value estimate.
-- Date-aware vehicle age calculation.
-- Current loan payoff and post-loan saving logic.
-- Age/warranty/parts-support risk penalty.
-- Recommendation wording added.
+- Added high-level category selection before calculations:
+  - מיני
+  - משפחתי
+  - פנאי שטח
+- Added decision priority:
+  - minimum monthly economic cost
+  - newest possible within constraints
+  - most reliable / lowest risk
+  - best future resale value
+- Added source confidence filtering.
+- Added needs_review handling and scoring penalty.
+- Bundled v0.6 data files.

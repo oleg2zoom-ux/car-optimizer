@@ -1,16 +1,169 @@
-﻿manufacturer,model,trim,category,powertrain,msrp_reference,annual_depr_rate,warranty_years,parts_support_years,reliability_risk_factor,notes
-Mitsubishi,Outlander,Premium,קרוסאובר 7 מקומות,Gasoline,170000,0.07,3,7,1.05,רפרנס אאוטלנדר 2016
-Toyota,Corolla,Hybrid,משפחתית קומפקטית,Hybrid,150000,0.08,5,7,0.75,שמירת ערך גבוהה
-Toyota,Yaris Cross,Hybrid,קרוסאובר קטן,Hybrid,155000,0.085,5,7,0.75,שמירת ערך גבוהה
-Hyundai,Kona,Hybrid,קרוסאובר קטן,Hybrid,176600,0.105,5,7,0.9,מחיר מבצע ידוע
-Hyundai,Ioniq,Hybrid,משפחתית קומפקטית,Hybrid,145000,0.085,5,7,0.9,היברידי נפוץ
-Kia,Niro,HEV,קרוסאובר קטן,Hybrid,160000,0.09,5,7,0.9,היברידי נפוץ
-Kia,Stonic,Urban,קרוסאובר קטן,Gasoline,120000,0.105,3,7,0.95,סופר מיני קרוסאובר
-Skoda,Kamiq,Ambition,קרוסאובר קטן,Gasoline,135000,0.105,3,7,1.0,אירופי קטן
-Skoda,Scala,Ambition,משפחתית קומפקטית,Gasoline,125000,0.105,3,7,1.0,משפחתית קומפקטית
-MG,MG3+,Luxury,סופר מיני,Hybrid,136000,0.115,7,7,1.05,אחריות ארוכה
-Chery,Tiggo 4,Hybrid,קרוסאובר קטן,Hybrid,136000,0.135,5,7,1.15,מותג סיני
-Jaecoo,7,PHEV,קרוסאובר בינוני,PHEV,190000,0.145,5,7,1.2,PHEV חדש בשוק
-BYD,Atto 3,Design,קרוסאובר קטן,EV,165000,0.15,6,7,1.1,חשמלי סיני נפוץ
-Tesla,Model 3,Standard,משפחתית חשמלית,EV,230000,0.155,4,7,1.05,חשמלי עם תנודתיות מחיר
-Mazda,CX-5,Executive,קרוסאובר בינוני,Gasoline,180000,0.095,3,7,0.9,סחירות טובה
+﻿manufacturer,brand,model,trim,category,powertrain,new_price_reference_ils,purchase_price,annual_depr_rate,warranty_years,parts_support_years,reliability_risk_factor,source_confidence,source_type,needs_review,source_url,notes,msrp_reference
+MG,MG,MG3 Hybrid+,Comfort 1.5L 194hp AT,סופר מיני,Hybrid,126888,128633,0.13,7,7,1.15,0.98,Official_Importer,לא,https://mg-israel.co.il/pricelist/mg3-hybrid/,MG מחירון רשמי,126888
+MG,MG,MG3 Hybrid+,Luxury 1.5L 194hp AT,סופר מיני,Hybrid,127888,129633,0.13,7,7,1.15,0.98,Official_Importer,לא,https://mg-israel.co.il/pricelist/mg3-hybrid/,MG מחירון רשמי,127888
+Chery,Chery,Tiggo 4 HEV,Comfort,קרוסאובר קטן,Hybrid,135990,137735,0.13,5,7,1.15,0.95,Official_Importer,לא,https://cheryisrael.co.il/pricing/,Chery מחירון רשמי,135990
+Chery,Chery,Tiggo 4 HEV,Luxury,קרוסאובר קטן,Hybrid,137990,139735,0.13,5,7,1.15,0.95,Official_Importer,לא,https://cheryisrael.co.il/pricing/,Chery מחירון רשמי,137990
+Skoda,Skoda,Scala,FL SEL 1.0 TSI,משפחתית קומפקטית,Gasoline,138490,140235,0.105,3,7,1.0,0.95,Official_Importer,לא,https://www.skoda.co.il/models/scala/,סקודה רשמי,138490
+Chery,Chery,Tiggo 4 HEV,Noble,קרוסאובר קטן,Hybrid,138990,140735,0.13,5,7,1.15,0.95,Official_Importer,לא,https://cheryisrael.co.il/pricing/,Chery מחירון רשמי,138990
+Jaecoo,Jaecoo,7 PHEV,Elegance,קרוסאובר בינוני,PHEV,179990,182440,0.145,5,7,1.15,0.95,Official_Importer,לא,https://jaecoo.co.il/price_list/,Jaecoo מחירון רשמי,179990
+Jaecoo,Jaecoo,7 PHEV,Premium,קרוסאובר בינוני,PHEV,189990,192776,0.145,5,7,1.15,0.95,Official_Importer,לא,https://jaecoo.co.il/price_list/,Jaecoo מחירון רשמי,189990
+Jaecoo,Jaecoo,7 PHEV,Luxury,קרוסאובר בינוני,PHEV,202990,205776,0.145,5,7,1.15,0.95,Official_Importer,לא,https://jaecoo.co.il/price_list/,Jaecoo מחירון רשמי,202990
+Hyundai,Hyundai,Kona Hybrid,Premium,קרוסאובר קטן,Hybrid,176990,179440,0.095,5,7,0.9,0.92,Official_Importer,לא,https://www.hyundaimotors.co.il/prices,יונדאי מחירון רשמי,176990
+Hyundai,Hyundai,Kona Hybrid,Prestige,קרוסאובר קטן,Hybrid,179990,182440,0.095,5,7,0.9,0.92,Official_Importer,לא,https://www.hyundaimotors.co.il/prices,יונדאי מחירון רשמי,179990
+Toyota,Toyota,Yaris,Hybrid From,סופר מיני,Hybrid,140990,142735,0.08,5,7,0.75,0.9,Official_Importer,לא,https://www.toyota.co.il/new-cars/yaris,טויוטה רשמי - מחיר החל מ,140990
+Toyota,Toyota,Yaris Cross,Hybrid ECO From,קרוסאובר קטן,Hybrid,158990,161066,0.08,5,7,0.75,0.9,Official_Importer,לא,https://www.toyota.co.il/new-cars/yaris-cross,טויוטה רשמי - מחיר החל מ,158990
+Mazda,Mazda,CX-5,2.5L Comfort,קרוסאובר בינוני,Gasoline,184900,187686,0.1,3,7,0.9,0.85,Official_Importer,כן,https://www.mazda.co.il/car-list,מאזדה רשמי,184900
+Mazda,Mazda,CX-5,2.5L Executive,קרוסאובר בינוני,Gasoline,194900,197686,0.1,3,7,0.9,0.85,Official_Importer,כן,https://www.mazda.co.il/car-list,מאזדה רשמי,194900
+MG,MG,ZS Hybrid+,From,קרוסאובר קטן,Hybrid,155888,157964,0.13,7,7,1.15,0.8,Official_Importer,כן,https://mg-israel.co.il/model/zs-hybrid/,MG רשמי - מחיר החל מ,155888
+Kia,Kia,Niro Hybrid,From,קרוסאובר קטן,Hybrid,178900,181350,0.095,5,7,0.9,0.8,Official_Importer,כן,https://kia-israel.co.il/רכב,קיה רשמי - מחיר החל מ,178900
+Kia,Kia,Sportage Hybrid,From,קרוסאובר בינוני,Hybrid,189900,192686,0.095,5,7,0.9,0.8,Official_Importer,כן,https://kia-israel.co.il/רכב,קיה רשמי - מחיר החל מ,189900
+Kia,Kia,Stonic,EX From,קרוסאובר קטן,Gasoline,129900,131645,0.1,3,7,0.9,0.75,Official_Importer,כן,https://kia-israel.co.il/,קיה רשמי/ידיעה,129900
+Skoda,Skoda,Karoq,From,קרוסאובר בינוני,Gasoline,169490,171940,0.105,3,7,1.0,0.7,Public_Catalog,כן,https://www.icar.co.il/מחירון_רכב/,iCar פופולרי,169490
+Peugeot,Peugeot,3008,From,קרוסאובר בינוני,Gasoline,186990,189776,0.12,3,7,1.08,0.7,Public_Catalog,כן,https://www.icar.co.il/מחירון_רכב/,iCar מחירון חדש,186990
+Hyundai,Hyundai,Tucson,From,קרוסאובר בינוני,Gasoline,199900,202686,0.1,5,7,0.9,0.7,Public_Catalog,כן,https://www.icar.co.il/מחירון_רכב/,iCar פופולרי,199900
+Hyundai,Hyundai,i10,Prime,מיני,Gasoline,89900,91370,0.1,5,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,89900
+Mitsubishi,Mitsubishi,Space Star,Instyle,מיני,Gasoline,89990,91460,0.105,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,89990
+Kia,Kia,Picanto,LX,מיני,Gasoline,92900,94370,0.1,5,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,92900
+Kia,Kia,Picanto,EX,מיני,Gasoline,99900,101370,0.1,5,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,99900
+Dacia,Dacia,Sandero,Stepway,סופר מיני,Gasoline,99990,101460,0.12,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,99990
+Fiat,Fiat,500,Hybrid,מיני,Hybrid,99990,101460,0.115,3,7,1.08,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,99990
+Suzuki,Suzuki,Ignis,GLX,מיני / פנאי קטן,Gasoline,104990,106460,0.1,3,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,104990
+Toyota,Toyota,Aygo X,Pulse,מיני,Gasoline,108990,110460,0.085,5,7,0.75,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,108990
+Hyundai,Hyundai,i20,Prime,סופר מיני,Gasoline,109900,111370,0.1,5,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,109900
+Suzuki,Suzuki,Swift,GLX,סופר מיני,Gasoline,109990,111460,0.1,3,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,109990
+Citroen,Citroen,C3,Feel,סופר מיני,Gasoline,109990,111460,0.12,3,7,1.08,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,109990
+Mazda,Mazda,2,Dynamic,סופר מיני,Gasoline,119900,121645,0.1,3,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,119900
+Skoda,Skoda,Fabia,Selection,סופר מיני,Gasoline,119990,121735,0.105,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,119990
+Seat,Seat,Ibiza,Style,סופר מיני,Gasoline,119990,121735,0.105,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,119990
+Renault,Renault,Clio,Equilibre,סופר מיני,Gasoline,119990,121735,0.12,3,7,1.08,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,119990
+Opel,Opel,Corsa,Edition,סופר מיני,Gasoline,119990,121735,0.12,3,7,1.08,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,119990
+Fiat,Fiat,Tipo,Sedan,משפחתית קומפקטית,Gasoline,119990,121735,0.12,3,7,1.08,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,119990
+Hyundai,Hyundai,Bayon,Prime,קרוסאובר קטן,Gasoline,124900,126645,0.1,5,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,124900
+Toyota,Toyota,Yaris,Active,סופר מיני,Gasoline,124990,126735,0.085,5,7,0.75,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,124990
+Peugeot,Peugeot,208,Active,סופר מיני,Gasoline,124990,126735,0.12,3,7,1.08,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,124990
+Hyundai,Hyundai,Venue,Premium,קרוסאובר קטן,Gasoline,129490,131235,0.1,5,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,129490
+Volkswagen,Volkswagen,Polo,Life,סופר מיני,Gasoline,129990,131735,0.105,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,129990
+Dacia,Dacia,Duster,Essential,קרוסאובר קטן,Gasoline,129990,131735,0.12,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,129990
+Skoda,Skoda,Kamiq,Selection,קרוסאובר קטן,Gasoline,139490,141566,0.105,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,139490
+Seat,Seat,Arona,Style,קרוסאובר קטן,Gasoline,139990,142066,0.105,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,139990
+Nissan,Nissan,Juke,Acenta,קרוסאובר קטן,Gasoline,139990,142066,0.105,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,139990
+Suzuki,Suzuki,Vitara,GLX,קרוסאובר קטן,Gasoline,139990,142066,0.1,3,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,139990
+Citroen,Citroen,C3 Aircross,Feel,קרוסאובר קטן,Gasoline,139990,142066,0.12,3,7,1.08,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,139990
+BYD,BYD,Dolphin,Comfort,משפחתית חשמלית,EV,141990,144066,0.15,5,7,1.15,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,141990
+MG,MG,4,EV,משפחתית חשמלית,EV,149888,151964,0.15,7,7,1.15,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,149888
+Kia,Kia,Seltos,Urban,קרוסאובר קטן,Gasoline,149900,151976,0.1,5,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,149900
+Mazda,Mazda,CX-3,Urban,קרוסאובר קטן,Gasoline,149900,151976,0.1,3,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,149900
+Volkswagen,Volkswagen,T-Cross,Life,קרוסאובר קטן,Gasoline,149990,152066,0.105,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,149990
+Mitsubishi,Mitsubishi,ASX,Instyle,קרוסאובר קטן,Gasoline,149990,152066,0.105,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,149990
+Honda,Honda,Jazz,Hybrid,סופר מיני,Hybrid,149990,152066,0.095,3,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,149990
+Subaru,Subaru,Impreza,Sport,משפחתית קומפקטית,Gasoline,149990,152066,0.1,3,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,149990
+Peugeot,Peugeot,2008,Active,קרוסאובר קטן,Gasoline,149990,152066,0.12,3,7,1.08,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,149990
+Citroen,Citroen,C4,Feel,משפחתית קומפקטית,Gasoline,149990,152066,0.12,3,7,1.08,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,149990
+Renault,Renault,Captur,Techno,קרוסאובר קטן,Gasoline,149990,152066,0.12,3,7,1.08,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,149990
+Dacia,Dacia,Jogger,7 seats,קרוסאובר 7 מקומות,Gasoline,149990,152066,0.12,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,149990
+Opel,Opel,Mokka,Edition,קרוסאובר קטן,Gasoline,149990,152066,0.12,3,7,1.08,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,149990
+Opel,Opel,Frontera,Hybrid,קרוסאובר בינוני,Hybrid,149990,152066,0.115,3,7,1.08,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,149990
+Fiat,Fiat,500X,Cross,קרוסאובר קטן,Gasoline,149990,152066,0.12,3,7,1.08,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,149990
+Mazda,Mazda,3,Spirit,משפחתית קומפקטית,Gasoline,154900,156976,0.1,3,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,154900
+Volkswagen,Volkswagen,Taigo,Life,קרוסאובר קטן,Gasoline,154990,157066,0.105,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,154990
+Seat,Seat,Leon,Style,משפחתית קומפקטית,Gasoline,154990,157066,0.105,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,154990
+Suzuki,Suzuki,S-Cross,GLX,קרוסאובר בינוני,Gasoline,154990,157066,0.1,3,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,154990
+Geely,Geely,Geometry C,Pro,קרוסאובר חשמלי,EV,154990,157066,0.15,3,7,1.15,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,154990
+Toyota,Toyota,Corolla,Sedan Hybrid,משפחתית קומפקטית,Hybrid,159990,162066,0.08,5,7,0.75,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,159990
+Skoda,Skoda,Octavia,Selection,משפחתית קומפקטית,Gasoline,159990,162066,0.105,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,159990
+Geely,Geely,EX5,EV,קרוסאובר חשמלי,EV,159990,162066,0.15,3,7,1.15,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,159990
+GAC,GAC,Aion Y,EV,קרוסאובר חשמלי,EV,159990,162066,0.15,4,7,1.15,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,159990
+Opel,Opel,Astra,Edition,משפחתית קומפקטית,Gasoline,159990,162066,0.12,3,7,1.08,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,159990
+Jeep,Jeep,Avenger,Gasoline,קרוסאובר קטן,Gasoline,159990,162066,0.12,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,159990
+Kia,Kia,EV3,Urban,קרוסאובר חשמלי,EV,164900,167350,0.115,5,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,164900
+Hyundai,Hyundai,Elantra,Hybrid,משפחתית קומפקטית,Hybrid,164990,167440,0.095,5,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,164990
+Suzuki,Suzuki,Jimny,GLX,שטח קטן,Gasoline,164990,167440,0.1,3,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,164990
+Peugeot,Peugeot,308,Active,משפחתית קומפקטית,Gasoline,164990,167440,0.12,3,7,1.08,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,164990
+MG,MG,HS,Hybrid+,קרוסאובר בינוני,Hybrid,166888,169338,0.13,7,7,1.15,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,166888
+Mazda,Mazda,CX-30,Executive,קרוסאובר קטן,Gasoline,169900,172350,0.1,3,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,169900
+Volkswagen,Volkswagen,Golf,Life,משפחתית קומפקטית,Gasoline,169990,172440,0.105,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,169990
+Nissan,Nissan,Qashqai,Acenta,קרוסאובר בינוני,Gasoline,169990,172440,0.105,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,169990
+BYD,BYD,Atto 3,Design,קרוסאובר חשמלי,EV,169990,172440,0.15,5,7,1.15,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,169990
+Leapmotor,Leapmotor,C10,EV,קרוסאובר חשמלי,EV,169990,172440,0.15,4,7,1.15,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,169990
+Omoda,Omoda,5,EV,קרוסאובר חשמלי,EV,169990,172440,0.15,3,7,1.15,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,169990
+Chery,Chery,Tiggo 7 Pro,Luxury,קרוסאובר בינוני,Gasoline,169990,172440,0.135,5,7,1.15,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,169990
+Renault,Renault,Arkana,Hybrid,קרוסאובר בינוני,Hybrid,169990,172440,0.115,3,7,1.08,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,169990
+Fiat,Fiat,Doblo,Combi,מסחרי/משפחתי,Diesel,169990,172440,0.115,3,7,1.08,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,169990
+Toyota,Toyota,C-HR,Hybrid,קרוסאובר קטן,Hybrid,174990,177440,0.08,5,7,0.75,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,174990
+Volkswagen,Volkswagen,T-Roc,Life,קרוסאובר קטן,Gasoline,174990,177440,0.105,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,174990
+Toyota,Toyota,Corolla Cross,Hybrid,קרוסאובר בינוני,Hybrid,179990,182440,0.08,5,7,0.75,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,179990
+Subaru,Subaru,Crosstrek,Limited,קרוסאובר קטן,Gasoline,179990,182440,0.1,3,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,179990
+Citroen,Citroen,Berlingo,Long,מסחרי/משפחתי,Diesel,179990,182440,0.115,3,7,1.08,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,179990
+Opel,Opel,Combo,Life,מסחרי/משפחתי,Diesel,179990,182440,0.115,3,7,1.08,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,179990
+Ford,Ford,Transit Connect,Van,מסחרי קל,Diesel,179990,182440,0.115,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,179990
+Honda,Honda,HR-V,Hybrid,קרוסאובר קטן,Hybrid,184990,187776,0.095,3,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,184990
+Renault,Renault,Kangoo,Diesel,מסחרי קל,Diesel,184990,187776,0.115,3,7,1.08,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,184990
+Jeep,Jeep,Renegade,Limited,קרוסאובר קטן,Gasoline,184990,187776,0.12,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,184990
+Honda,Honda,Civic,Hybrid,משפחתית קומפקטית,Hybrid,189990,192776,0.095,3,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,189990
+BYD,BYD,Seal U,PHEV,קרוסאובר בינוני,PHEV,189990,192776,0.145,5,7,1.15,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,189990
+Chery,Chery,Tiggo 8 Pro,7 seats,קרוסאובר 7 מקומות,Gasoline,189990,192776,0.135,5,7,1.15,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,189990
+Peugeot,Peugeot,Rifter,Long,מסחרי/משפחתי,Diesel,189990,192776,0.115,3,7,1.08,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,189990
+Citroen,Citroen,C5 Aircross,Feel,קרוסאובר בינוני,Gasoline,189990,192776,0.12,3,7,1.08,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,189990
+Renault,Renault,Megane E-Tech,EV,משפחתית חשמלית,EV,189990,192776,0.135,3,7,1.08,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,189990
+Opel,Opel,Grandland,Edition,קרוסאובר בינוני,Gasoline,189990,192776,0.12,3,7,1.08,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,189990
+Kia,Kia,Niro,EV,קרוסאובר חשמלי,EV,199900,202686,0.115,5,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,199900
+Cupra,Cupra,Formentor,1.5 TSI,קרוסאובר בינוני,Gasoline,199990,202776,0.105,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,199990
+Cupra,Cupra,Born,EV,משפחתית חשמלית,EV,199990,202776,0.12,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,199990
+Tesla,Tesla,Model 3,RWD,משפחתית חשמלית,EV,199990,202776,0.17,4,7,1.05,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,199990
+XPeng,XPeng,G6,EV,קרוסאובר חשמלי,EV,199990,202776,0.15,4,7,1.15,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,199990
+Volvo,Volvo,EX30,EV,יוקרה חשמלית,EV,199990,202776,0.16,3,7,0.95,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,199990
+Audi,Audi,A3,Sportback,יוקרה קומפקטית,Gasoline,199990,202776,0.145,3,7,0.95,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,199990
+BMW,BMW,1 Series,118i,יוקרה קומפקטית,Gasoline,199990,202776,0.145,3,7,0.95,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,199990
+Lexus,Lexus,LBX,Hybrid,יוקרה / קרוסאובר קטן,Hybrid,199990,202776,0.14,3,7,0.95,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,199990
+Volkswagen,Volkswagen,Caddy,Combi,מסחרי/משפחתי,Diesel,199990,202776,0.1,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,199990
+Hyundai,Hyundai,Ioniq 5,EV,קרוסאובר חשמלי,EV,205990,208776,0.115,5,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,205990
+MG,MG,Marvel R,EV,קרוסאובר חשמלי,EV,209888,212674,0.15,7,7,1.15,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,209888
+Hyundai,Hyundai,Ioniq 6,EV,משפחתית חשמלית,EV,209990,212776,0.115,5,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,209990
+Mitsubishi,Mitsubishi,Outlander,Premium,קרוסאובר 7 מקומות,Gasoline,209990,212776,0.105,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,209990
+Hyundai,Hyundai,Sonata,Hybrid,משפחתית גדולה,Hybrid,216990,219776,0.095,5,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,216990
+BYD,BYD,Seal,Design,משפחתית חשמלית,EV,216990,219776,0.15,5,7,1.15,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,216990
+Toyota,Toyota,Prius,Plug-in,משפחתית קומפקטית,PHEV,219990,222776,0.095,5,7,0.75,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,219990
+Skoda,Skoda,Superb,Selection,משפחתית גדולה,Gasoline,219990,222776,0.105,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,219990
+Skoda,Skoda,Enyaq,EV,קרוסאובר חשמלי,EV,219990,222776,0.12,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,219990
+Volkswagen,Volkswagen,Tiguan,Life,קרוסאובר בינוני,Gasoline,219990,222776,0.105,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,219990
+Volkswagen,Volkswagen,ID.4,EV,קרוסאובר חשמלי,EV,219990,222776,0.12,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,219990
+Mitsubishi,Mitsubishi,Eclipse Cross,PHEV,קרוסאובר בינוני,PHEV,219990,222776,0.115,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,219990
+Honda,Honda,ZR-V,Hybrid,קרוסאובר בינוני,Hybrid,219990,222776,0.095,3,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,219990
+Subaru,Subaru,Forester,Limited,קרוסאובר בינוני,Gasoline,219990,222776,0.1,3,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,219990
+Tesla,Tesla,Model Y,RWD,קרוסאובר חשמלי,EV,219990,222776,0.17,4,7,1.05,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,219990
+Peugeot,Peugeot,5008,Active,קרוסאובר 7 מקומות,Gasoline,219990,222776,0.12,3,7,1.08,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,219990
+Jeep,Jeep,Compass,Limited,קרוסאובר בינוני,Gasoline,219990,222776,0.12,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,219990
+Toyota,Toyota,RAV4,Hybrid,קרוסאובר בינוני,Hybrid,229990,232776,0.08,5,7,0.75,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,229990
+Toyota,Toyota,Camry,Hybrid,משפחתית גדולה,Hybrid,229990,232776,0.08,5,7,0.75,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,229990
+Nissan,Nissan,X-Trail,e-Power,קרוסאובר 7 מקומות,Hybrid,229990,232776,0.1,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,229990
+Mercedes-Benz,Mercedes-Benz,A-Class,A180,יוקרה קומפקטית,Gasoline,229990,232776,0.145,3,7,0.95,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,229990
+Kia,Kia,EV6,GT Line,קרוסאובר חשמלי,EV,239900,243557,0.115,5,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,239900
+Skoda,Skoda,Kodiaq,Selection,קרוסאובר 7 מקומות,Gasoline,239990,243647,0.105,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,239990
+Lexus,Lexus,UX,Hybrid,יוקרה / קרוסאובר קטן,Hybrid,239990,243647,0.14,3,7,0.95,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,239990
+Volvo,Volvo,XC40,Mild Hybrid,יוקרה / קרוסאובר קטן,Gasoline,249990,253647,0.145,3,7,0.95,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,249990
+Audi,Audi,Q3,Advanced,יוקרה / קרוסאובר קטן,Gasoline,249990,253647,0.145,3,7,0.95,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,249990
+Isuzu,Isuzu,D-Max,Double Cab,טנדר,Diesel,249990,253647,0.115,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,249990
+Mazda,Mazda,MX-5,Roadster,ספורט / קבריולט,Gasoline,254900,258557,0.1,3,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,254900
+Toyota,Toyota,Hilux,Double Cab,טנדר,Diesel,259990,263647,0.08,5,7,0.75,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,259990
+Nissan,Nissan,Ariya,EV,קרוסאובר חשמלי,EV,259990,263647,0.12,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,259990
+Subaru,Subaru,Outback,Limited,קרוסאובר גדול,Gasoline,259990,263647,0.1,3,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,259990
+Subaru,Subaru,Solterra,EV,קרוסאובר חשמלי,EV,259990,263647,0.115,3,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,259990
+BMW,BMW,X1,sDrive18i,יוקרה / קרוסאובר קטן,Gasoline,269990,273647,0.145,3,7,0.95,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,269990
+Kia,Kia,Sorento,Hybrid,קרוסאובר 7 מקומות,Hybrid,279900,283557,0.095,5,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,279900
+Honda,Honda,CR-V,Hybrid,קרוסאובר בינוני,Hybrid,279990,283647,0.095,3,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,279990
+Ford,Ford,Ranger,Double Cab,טנדר,Diesel,279990,283647,0.115,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,279990
+BYD,BYD,Tang,EV 7 seats,קרוסאובר 7 מקומות,EV,289990,293647,0.15,5,7,1.15,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,289990
+Mazda,Mazda,CX-60,PHEV,קרוסאובר בינוני,PHEV,299900,303557,0.11,3,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,299900
+BYD,BYD,Han,EV,משפחתית גדולה,EV,299990,303647,0.15,5,7,1.15,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,299990
+Audi,Audi,Q4 e-tron,EV,יוקרה חשמלית,EV,299990,303647,0.16,3,7,0.95,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,299990
+BMW,BMW,iX1,EV,יוקרה חשמלית,EV,299990,303647,0.16,3,7,0.95,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,299990
+Mercedes-Benz,Mercedes-Benz,GLA,GLA200,יוקרה / קרוסאובר קטן,Gasoline,299990,303647,0.145,3,7,0.95,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,299990
+Mercedes-Benz,Mercedes-Benz,EQA,EV,יוקרה חשמלית,EV,299990,303647,0.16,3,7,0.95,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,299990
+Volvo,Volvo,XC60,B5,יוקרה / קרוסאובר בינוני,Gasoline,329990,333647,0.145,3,7,0.95,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,329990
+Lexus,Lexus,NX,Hybrid,יוקרה / קרוסאובר בינוני,Hybrid,329990,333647,0.14,3,7,0.95,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,329990
+Hyundai,Hyundai,Santa Fe,Hybrid,קרוסאובר 7 מקומות,Hybrid,365990,371216,0.095,5,7,0.9,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,365990
+Toyota,Toyota,Land Cruiser,Luxury,שטח / SUV גדול,Diesel,399990,405216,0.085,5,7,0.75,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,399990
+Jeep,Jeep,Wrangler,Rubicon,שטח / SUV גדול,Gasoline,399990,405216,0.12,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,399990
+Chevrolet,Chevrolet,Silverado,2500HD,טנדר גדול,Diesel,399990,405216,0.115,3,7,1.0,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,399990
+Tesla,Tesla,Model S,Long Range,יוקרה חשמלית,EV,519990,525216,0.185,4,7,1.05,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,519990
+Tesla,Tesla,Model X,Long Range,יוקרה חשמלית,EV,579990,585216,0.185,4,7,1.05,0.55,Catalog_Seed,כן,https://data.gov.il/he/datasets/ministry_of_transport/mehir_yevuan,Seed למחירון; יש לאמת מול Data.gov/יבואן,579990

@@ -12,10 +12,6 @@ def monthly_age_risk_penalty(
     reliability_risk_factor: float,
     risk_tolerance: str,
 ) -> float:
-    """
-    Returns a monthly risk penalty in NIS-equivalent decision units.
-    This is not a guaranteed maintenance cost. It is a decision penalty.
-    """
     age = float(age_years)
     warranty = float(warranty_years)
     parts = float(parts_support_years)

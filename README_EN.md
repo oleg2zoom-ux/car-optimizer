@@ -1,15 +1,12 @@
-# Owner-First Car Replacement Optimizer v0.4
+# Owner-First Car Replacement Optimizer v0.7
 
-A Hebrew Streamlit app that starts from the user's current vehicle and recommends whether and when to replace it.
+Hebrew Streamlit app with v0.6 car price database.
 
-Key features:
-- current vehicle reference matching;
-- automatic value estimate;
-- current date based age calculation;
-- existing loan modeling;
-- recommendation to keep paying and save after loan payoff;
-- age/warranty risk penalty;
-- next-car purchase constraints.
+New in v0.7:
+- first choose high-level category: mini, family, SUV/leisure;
+- choose decision priority: lowest cost, newest possible, most reliable, best resale value;
+- bundled 168-row vehicle price database;
+- supports source confidence and needs-review penalties.
 
 Run:
 

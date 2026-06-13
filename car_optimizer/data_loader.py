@@ -16,6 +16,8 @@ REPLACEMENT_REQUIRED_COLUMNS = [
     "category",
     "powertrain",
     "ownership_type",
+    "km",
+    "hand",
     "purchase_price",
     "annual_depr_rate",
     "risk_sigma",
@@ -31,10 +33,9 @@ NUMERIC_COLUMNS = [
     "vehicle_age_years",
     "km",
     "hand",
-    "msrp_new",
-    "asking_price",
-    "deal_price_est",
-    "trade_in_price_est",
+    "new_price_reference_ils",
+    "license_fee_ils",
+    "msrp_reference",
     "purchase_price",
     "annual_depr_rate",
     "risk_sigma",
@@ -49,12 +50,29 @@ def normalize_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
     df.columns = [str(col).strip() for col in df.columns]
 
+    if "manufacturer" not in df.columns and "brand" in df.columns:
+        df["manufacturer"] = df["brand"]
+    if "brand" not in df.columns and "manufacturer" in df.columns:
+        df["brand"] = df["manufacturer"]
+
     for col in NUMERIC_COLUMNS:
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors="coerce")
 
     if "trim" in df.columns:
         df["trim"] = df["trim"].fillna("")
+
+    if "source_confidence" in df.columns:
+        df["source_confidence"] = df["source_confidence"].fillna(0.3)
+
+    if "needs_review" not in df.columns:
+        df["needs_review"] = "כן"
+
+    if "msrp_reference" not in df.columns:
+        if "new_price_reference_ils" in df.columns:
+            df["msrp_reference"] = df["new_price_reference_ils"]
+        else:
+            df["msrp_reference"] = df.get("purchase_price", 0)
 
     return df
 
@@ -69,7 +87,9 @@ def load_replacement_options(uploaded_file=None) -> pd.DataFrame:
     else:
         filename = uploaded_file.name.lower()
         if filename.endswith(".xlsx") or filename.endswith(".xls"):
-            df = pd.read_excel(uploaded_file)
+            xls = pd.ExcelFile(uploaded_file)
+            sheet_name = "App_Replacement_Options" if "App_Replacement_Options" in xls.sheet_names else xls.sheet_names[0]
+            df = pd.read_excel(uploaded_file, sheet_name=sheet_name)
         else:
             df = pd.read_csv(uploaded_file)
 

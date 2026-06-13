@@ -43,8 +43,8 @@ def estimate_current_vehicle_value(current_info: dict, today: date) -> dict:
     known_purchase_price = float(current_info.get("known_purchase_price", 0))
     safety_margin = float(current_info.get("current_value_safety_margin", 0))
 
-    base_depr = float(ref["annual_depr_rate"])
-    msrp_ref = float(ref["msrp_reference"])
+    base_depr = float(ref.get("annual_depr_rate", 0.10))
+    msrp_ref = float(ref.get("msrp_reference", ref.get("new_price_reference_ils", ref.get("purchase_price", 0))))
 
     if known_current_value > 0:
         estimated = known_current_value
@@ -94,9 +94,9 @@ def estimate_current_vehicle_value(current_info: dict, today: date) -> dict:
         "vehicle_age_years": vehicle_age,
         "method": method,
         "annual_depr_rate": base_depr,
-        "warranty_years": float(ref["warranty_years"]),
-        "parts_support_years": float(ref["parts_support_years"]),
-        "reliability_risk_factor": float(ref["reliability_risk_factor"]),
+        "warranty_years": float(ref.get("warranty_years", 3)),
+        "parts_support_years": float(ref.get("parts_support_years", 7)),
+        "reliability_risk_factor": float(ref.get("reliability_risk_factor", 1.0)),
     }
 
 
@@ -117,4 +117,5 @@ def future_value_of_next_vehicle(
         "pessimistic": max(pessimistic, 0.0),
         "optimistic": max(optimistic, 0.0),
         "adjusted_rate": rate,
+        "value_retention_ratio": max(expected, 0.0) / max(float(purchase_price), 1.0),
     }

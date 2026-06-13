@@ -22,3 +22,10 @@ DEFAULTS = {
     "max_purchase_price": 250000,
     "max_wait_months": 72,
 }
+
+PRIORITY_LABELS = {
+    "עלות חודשית מינימלית": "min_cost",
+    "רכב חדש ככל האפשר במסגרת האילוצים": "newest_possible",
+    "רכב אמין ביותר / סיכון נמוך": "most_reliable",
+    "רכב שמחזיק מחיר בעתיד": "best_resale_value",
+}

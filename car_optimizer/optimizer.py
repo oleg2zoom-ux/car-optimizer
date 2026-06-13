@@ -6,6 +6,7 @@ from car_optimizer.finance import (
     monthly_payment,
     total_interest_for_loan,
 )
+from car_optimizer.priority_model import priority_adjustment
 from car_optimizer.risk_model import average_risk_penalty_over_months
 from car_optimizer.valuation_model import depreciated_value, future_value_of_next_vehicle
 
@@ -16,7 +17,6 @@ def candidate_wait_months(params: dict) -> list[int]:
 
     candidates = set(range(0, max_wait + 1, step))
 
-    # Important decision milestones
     if params["has_existing_loan"]:
         loan_end = int(params["existing_remaining_months"])
         for delta in [0, 3, 6, 12]:
@@ -47,7 +47,6 @@ def evaluate_scenario(row: pd.Series, wait_months: int, params: dict) -> dict:
 
     existing_balance = 0.0
     existing_interest_paid = 0.0
-    paid_existing_months = 0
 
     if params["has_existing_loan"]:
         paid_existing_months = min(wait_months, int(params["existing_remaining_months"]))
@@ -70,14 +69,10 @@ def evaluate_scenario(row: pd.Series, wait_months: int, params: dict) -> dict:
     if params["has_existing_loan"]:
         months_after_loan_finished = max(wait_months - int(params["existing_remaining_months"]), 0)
 
-    savings_until_purchase = (
-        float(params["monthly_saving_capacity"]) * wait_months
-    )
+    savings_until_purchase = float(params["monthly_saving_capacity"]) * wait_months
 
     if params["redirect_finished_loan_to_savings"] and params["has_existing_loan"]:
-        savings_until_purchase += (
-            float(params["existing_monthly_payment"]) * months_after_loan_finished
-        )
+        savings_until_purchase += float(params["existing_monthly_payment"]) * months_after_loan_finished
 
     net_equity = current_sale_value - existing_balance
     equity_for_purchase = max(net_equity, 0.0)
@@ -154,7 +149,13 @@ def evaluate_scenario(row: pd.Series, wait_months: int, params: dict) -> dict:
     economic_monthly = economic_cost / total_months
 
     payment_penalty = max(next_monthly - float(params["max_monthly_payment"]), 0.0) * 6
-    score = economic_monthly + payment_penalty
+
+    calc = {
+        "next_value_retention_ratio": next_fv["value_retention_ratio"],
+    }
+
+    priority_penalty = priority_adjustment(calc, row.to_dict(), params)
+    score = economic_monthly + payment_penalty + priority_penalty
 
     if wait_months == 0:
         timing_label = "עכשיו"
@@ -197,8 +198,10 @@ def evaluate_scenario(row: pd.Series, wait_months: int, params: dict) -> dict:
         "current_risk_total": current_risk_total,
         "next_risk_total": next_risk_total,
         "next_future_value": next_fv["expected"],
+        "next_value_retention_ratio": next_fv["value_retention_ratio"],
         "economic_monthly": economic_monthly,
         "passes_payment_limit": next_monthly <= float(params["max_monthly_payment"]),
+        "priority_penalty": priority_penalty,
         "score": score,
         "reason": reason,
     }
@@ -241,6 +244,9 @@ def run_owner_first_optimization(df: pd.DataFrame, params: dict) -> pd.DataFrame
         for _, row in df.iterrows():
             calc = evaluate_scenario(row, wait_months, params)
 
+            source_conf = row.get("source_confidence", 0)
+            needs_review = row.get("needs_review", "")
+
             rows.append(
                 {
                     "המלצת פעולה": calc["action"],
@@ -268,15 +274,19 @@ def run_owner_first_optimization(df: pd.DataFrame, params: dict) -> pd.DataFrame
                     "קנס סיכון חודשי רכב קיים": round(calc["current_risk_monthly"]),
                     "קנס סיכון חודשי רכב הבא": round(calc["next_risk_monthly"]),
                     "שווי עתידי צפוי רכב הבא": round(calc["next_future_value"]),
+                    "יחס שמירת ערך": round(calc["next_value_retention_ratio"], 3),
                     "עלות חודשית כלכלית": round(calc["economic_monthly"]),
+                    "קנס/בונוס עדיפות": round(calc["priority_penalty"]),
+                    "ציון עדיפות": round(calc["score"]),
                     "עומד בתקרת החזר": "כן" if calc["passes_payment_limit"] else "לא",
+                    "אמינות מקור": source_conf,
+                    "דורש אימות": needs_review,
                     "נימוק המלצה": calc["reason"],
-                    "ציון": round(calc["score"]),
                 }
             )
 
     result = pd.DataFrame(rows)
     if not result.empty:
-        result = result.sort_values(["ציון", "עלות חודשית כלכלית"], ascending=True)
+        result = result.sort_values(["ציון עדיפות", "עלות חודשית כלכלית"], ascending=True)
 
     return result
